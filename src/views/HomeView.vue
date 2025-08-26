@@ -51,6 +51,8 @@ export default {
       await axios
         .get("api/latest/")
         .then((response) => {
+          // LÍNEA CLAVE DE DEPURACIÓN 👇
+      console.log('Datos recibidos por Axios:', response.data);
           this.latestProducts = response.data;
           document.title = 'Bienvenidos | Finca Samaniego'; // Set the page title
         })
