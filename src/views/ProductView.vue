@@ -3,7 +3,11 @@
     <div class="columns is-multiline">
       <div class="column is-6">
         <figure class="image product-image">
-          <img v-if="product.image_url" :src="product.image_url" alt="Product Image" />
+          <img
+            v-if="product.image_url"
+            :src="product.image_url"
+            alt="Product Image"
+          />
         </figure>
       </div>
 
@@ -49,10 +53,11 @@ export default {
       const category_slug = this.$route.params.category_slug;
       const product_slug = this.$route.params.product_slug;
       await axios
-        .get(`api/product/${category_slug}/${product_slug}/`)
+        .get(`/api/product/${category_slug}/${product_slug}/`)
         .then((response) => {
           this.product = response.data;
-          document.title = this.product.name + ' | Finca Samaniego'; // Set the page title
+          console.log("Product data:", this.product);
+          document.title = this.product.name + " | Finca Samaniego"; // Set the page title
         })
         .catch((error) => {
           console.error("Error fetching product:", error);

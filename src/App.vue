@@ -30,15 +30,18 @@
           id="navbar-menu"
           v-bind:class="{ 'is-active': showMobileMenu }"
         >
-          <router-link to="/" class="navbar-item">Inicio</router-link>
-          <router-link to="/about" class="navbar-item">Nosotros</router-link>
-          <router-link to="/salsa_chiltepin" class="navbar-item"
-            >Salsa Chiltepin</router-link
-          >
-          <router-link to="/chiltepin_entero" class="navbar-item"
-            >Chiltepin Entero</router-link
-          >
-          <router-link to="/contact" class="navbar-item">Contacto</router-link>
+        <div class="navbar-end">
+          <a href="/" class="navbar-item">Inicio</a>
+          <a href="/about" class="navbar-item">Nosotros</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Productos</a>
+            <div class="navbar-dropdown">
+              <a href="/salsa_chiltepin" class="navbar-item">Salsa Chiltepin</a>
+              <a href="/chiltepin_entero" class="navbar-item">Chiltepin Entero</a>
+            </div>
+            </div>
+          <a href="/contact" class="navbar-item">Contacto</a>
+          </div>
         </div>
       </nav>
 
