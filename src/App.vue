@@ -1,58 +1,78 @@
 <template>
-    <div id="wrapper">
-      <header>
-        <nav class="navbar is-dark">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-              <img src="@/assets/finca_sama.png" alt="Finca Samaniego Logo" />
-              </a>
-              <span class="navbar-item is-align-items-center" style="display: flex; align-items: center;">
-              <strong>Finca Samaniego</strong>
-              </span>
-              <a class="navbar-burger"aria-label="menu" aria-expanded="false" data-target="navbar-menu" @click="showMobileMenu = !showMobileMenu">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </a>
-          </div>
-          <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu}">
-            <div class="navbar-end">
-              <a class="navbar-item" href="/">Inicio</a>
-              <a class="navbar-item" href="/about">Nosotros</a>
-              <a class="navbar-item" href="/salsa_chiltepin">Salsa Chiltepin</a>
-              <a class="navbar-item" href="/chiltepin_entero">Chiltepin Entero</a>
-              <a class="navbar-item" href="/contact">Contacto</a>
-            </div>
-          </div>
-        </nav>
-
-        <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading}">
-          <div class="lds-dual-ring"></div>
+  <div id="wrapper">
+    <header>
+      <nav class="navbar is-dark">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="@/assets/finca_sama.png" alt="Finca Samaniego Logo" />
+          </a>
+          <span
+            class="navbar-item is-align-items-center"
+            style="display: flex; align-items: center"
+          >
+            <strong>Finca Samaniego</strong>
+          </span>
+          <a
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbar-menu"
+            @click="showMobileMenu = !showMobileMenu"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <section class="section">
-          <router-view/>
-        </section>
+        <div
+          class="navbar-menu"
+          id="navbar-menu"
+          v-bind:class="{ 'is-active': showMobileMenu }"
+        >
+          <router-link to="/" class="navbar-item">Inicio</router-link>
+          <router-link to="/about" class="navbar-item">Nosotros</router-link>
+          <router-link to="/salsa_chiltepin" class="navbar-item"
+            >Salsa Chiltepin</router-link
+          >
+          <router-link to="/chiltepin_entero" class="navbar-item"
+            >Chiltepin Entero</router-link
+          >
+          <router-link to="/contact" class="navbar-item">Contacto</router-link>
+        </div>
+      </nav>
 
-        <footer class="footer">
-            <p class="content has-text-centered">Finca Samaniego Copyright (c) 2025
-            </p>
-        </footer>
-      </header>
-    </div>
-  </template>
+      <div
+        class="is-loading-bar has-text-centered"
+        v-bind:class="{ 'is-loading': $store.state.isLoading }"
+      >
+        <div class="lds-dual-ring"></div>
+      </div>
+      <section class="section">
+        <router-view />
+      </section>
+
+      <footer class="footer">
+        <p class="content has-text-centered">
+          Finca Samaniego Copyright (c) 2025
+        </p>
+      </footer>
+    </header>
+  </div>
+</template>
 
 <script>
-export default{
+export default {
   data() {
     return {
       showMobileMenu: false,
     };
   },
-}</script>
+};
+</script>
 
 <style lang="scss">
-@import '../node_modules/bulma/';
+@import "../node_modules/bulma/";
 
 .lds-dual-ring {
   display: inline-block;
@@ -71,10 +91,10 @@ export default{
   margin: 8px;
   border-radius: 50%;
   border: 8px solid transparent;
-  border-top: 8px solid #888888;   /* dark gray */
+  border-top: 8px solid #888888; /* dark gray */
   border-right: 8px solid #bbbbbb; /* medium gray */
-  border-bottom: 8px solid #dddddd;/* light gray */
-  border-left: 8px solid #f3f3f3;  /* very light gray */
+  border-bottom: 8px solid #dddddd; /* light gray */
+  border-left: 8px solid #f3f3f3; /* very light gray */
   animation: lds-dual-ring 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
   box-shadow: 0 0 30px #88888844;
 }

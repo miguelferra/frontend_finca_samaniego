@@ -3,11 +3,7 @@
     <div class="columns is-multiline">
       <div class="column is-6">
         <figure class="image product-image">
-          <img
-            v-if="product.get_image"
-            :src="product.get_image"
-            alt="Product Image"
-          />
+          <img v-if="product.image_url" :src="product.image_url" alt="Product Image" />
         </figure>
       </div>
 
