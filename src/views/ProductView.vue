@@ -1,5 +1,5 @@
 <template>
-  <div class="product-view">
+  <div class="product-view" v-if="product">
     <div class="columns is-multiline">
       <div class="column is-6">
         <figure class="image product-image">
@@ -32,36 +32,53 @@
       </div>
     </div>
   </div>
+  <div v-else>
+     <h1 class="title has-text-centered">Producto no encontrado</h1>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios"; // REMOVED
+import { allProducts } from "@/data/products.js"; // IMPORTED
+
 export default {
   name: "ProductView",
   data() {
     return {
-      product: {},
+      product: null, // Initialize as null
       quantity: 1,
     };
   },
   mounted() {
     this.getProduct();
   },
+  watch: {
+    // Si el usuario navega entre productos, esto asegura que la vista se actualice
+    '$route'(to, from) {
+      if (to.name === 'Product') {
+        this.getProduct();
+      }
+    }
+  },
   methods: {
-    async getProduct() {
+    // CHANGED: El método ahora es síncrono y busca en el array local
+    getProduct() {
       this.$store.commit("setLoading", true);
+      
       const category_slug = this.$route.params.category_slug;
       const product_slug = this.$route.params.product_slug;
-      await axios
-        .get(`/api/product/${category_slug}/${product_slug}/`)
-        .then((response) => {
-          this.product = response.data;
-          console.log("Product data:", this.product);
-          document.title = this.product.name + " | Finca Samaniego"; // Set the page title
-        })
-        .catch((error) => {
-          console.error("Error fetching product:", error);
-        });
+
+      // Buscamos el producto en nuestro archivo de datos
+      const foundProduct = allProducts.find(p => p.category_slug === category_slug && p.slug === product_slug);
+
+      if (foundProduct) {
+        this.product = foundProduct;
+        document.title = this.product.name + " | Finca Samaniego";
+      } else {
+        console.error("Producto no encontrado!");
+        // Aquí podrías redirigir a una página 404
+      }
+      
       this.$store.commit("setLoading", false);
     },
   },
@@ -70,8 +87,8 @@ export default {
 
 <style>
 .product-image img {
-  width: 600px; /* Set your desired width */
-  height: 600px; /* Set your desired height */
+  width: 600px;
+  height: 600px;
   object-fit: cover;
   display: block;
   margin: 0 auto;

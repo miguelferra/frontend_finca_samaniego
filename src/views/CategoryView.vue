@@ -14,46 +14,40 @@
 </template>
 
 <script>
-import axios from "axios";
-import { toast } from "bulma-toast";
 import ProductBox from "@/components/ProductBox.vue";
+import { allProducts } from "@/data/products.js"; // IMPORTED: La única fuente de datos
+
 export default {
   name: "CategoryView",
-  data() {
-    return {
-      category: {
-        products: [],
-      },
-    };
-  },
   components: {
     ProductBox,
   },
-  mounted() {
-    this.getCategory();
-  },
-  methods: {
-    async getCategory() {
-      const category_slug = this.$route.params.category_slug;
-      this.$store.commit("setLoading", true);
-      await axios
-        .get(`api/product/${category_slug}/`)
-        .then((response) => {
-          this.category = response.data;
-          document.title = this.category.name + " | Finca Samaniego"; // Set the page title
-        })
-        .catch((error) => {
-          console.error("Error fetching category:", error);
-          toast({
-            message: "Error al cargar la categoría",
-            type: "is-danger",
-            dismissible: true,
-            pauseOnHover: true,
-            duration: 2000,
-          });
-        });
-      this.$store.commit("setLoading", false);
+  computed: {
+    category_slug() {
+      return this.$route.params.category_slug;
     },
-  },
+    category() {
+      this.$store.commit("setLoading", true);
+      
+      const filteredProducts = allProducts.filter(
+        p => p.category_slug === this.category_slug
+      );
+      
+      const categoryName = filteredProducts.length > 0 
+        ? filteredProducts[0].category_name 
+        : 'Categoría no encontrada';
+      
+      if (filteredProducts.length > 0) {
+        document.title = categoryName + ' | Finca Samaniego';
+      }
+
+      this.$store.commit("setLoading", false);
+      
+      return {
+        products: filteredProducts,
+        name: categoryName
+      };
+    }
+  }
 };
 </script>

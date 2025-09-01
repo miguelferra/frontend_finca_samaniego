@@ -23,8 +23,8 @@ const routes = [
     name: "Product",
     component: ProductView,
   },
-    {
-    path: "/:category_slug/",
+  {
+    path: "/:category_slug",
     name: "Category",
     component: CategoryView,
   },

@@ -16,9 +16,9 @@
 
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h2 class="is-size-2 has-text-centered mb-4">Products</h2>
+        <h2 class="is-size-2 has-text-centered mb-4">Productos Recientes</h2>
       </div>
-     <ProductBox
+      <ProductBox
         v-for="product in latestProducts"
         :key="product.id"
         :product="product"
@@ -28,40 +28,31 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios"; // REMOVED
 import ProductBox from "@/components/ProductBox.vue";
+import { allProducts } from "@/data/products.js"; // IMPORTED: nuestra nueva fuente de datos
+
 export default {
   name: "HomeView",
   data() {
     return {
+      imageUrl: '/background.jpg',
+      // CHANGED: Cargamos los datos directamente
       latestProducts: [],
-      // 2. Se añade la ruta de la imagen a los datos
-      imageUrl: "/background.jpg",
     };
   },
   components: {
     ProductBox
   },
   mounted() {
-    this.getLatestProducts();
+    // CHANGED: Obtenemos los productos de nuestro archivo local
+    // Puedes ordenar por fecha si quieres los "más recientes"
+    this.latestProducts = allProducts.sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
+    document.title = 'Bienvenidos | Finca Samaniego';
   },
-  methods: {
-    async getLatestProducts() {
-      this.$store.commit("setLoading", true);
-      await axios
-        .get("api/latest/")
-        .then((response) => {
-          // LÍNEA CLAVE DE DEPURACIÓN 👇
-      console.log('Datos recibidos por Axios:', response.data);
-          this.latestProducts = response.data;
-          document.title = 'Bienvenidos | Finca Samaniego'; // Set the page title
-        })
-        .catch((error) => {
-          console.error("Error fetching latest products:", error);
-        });
-      this.$store.commit("setLoading", false);
-    },
-  },
+  // REMOVED: El método getLatestProducts ya no es necesario
+  // methods: {
+  //   async getLatestProducts() { ... }
+  // }
 };
 </script>
-
