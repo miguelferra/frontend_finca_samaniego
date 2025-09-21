@@ -50,14 +50,14 @@
                     class="navbar-item"
                     @click="closeMobileMenu"
                   >
-                    🌶️ Salsa Chiltepin
+                    🥫 Salsa Chiltepin
                   </router-link>
                   <router-link
                     to="/chiltepin_entero"
                     class="navbar-item"
                     @click="closeMobileMenu"
                   >
-                    🌱 Chiltepin Entero
+                    🌶️ Chiltepin Entero
                   </router-link>
                 </div>
               </div>
@@ -210,6 +210,40 @@ $accent-color: #ff6b6b;
       background-color: #f5f5f5;
     }
   }
+}
+
+.navbar-menu.is-active {
+  background: #221510; // Match main background
+  color: #fff;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 8px 24px rgba(72, 187, 120, 0.15);
+  border-top: 3px solid #66bb6a;
+  padding-bottom: 1rem;
+}
+
+.navbar-menu.is-active .navbar-item,
+.navbar-menu.is-active .navbar-link {
+  color: #fff !important;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar-menu.is-active .navbar-item:hover,
+.navbar-menu.is-active .navbar-link:hover {
+  background: #66bb6a !important;
+  color: #221510 !important;
+  border-radius: 8px;
+}
+
+.navbar-menu.is-active .navbar-dropdown {
+  background: #221510;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(72, 187, 120, 0.12);
+}
+
+.navbar-menu.is-active .navbar-dropdown .navbar-item:hover {
+  background: #388e3c !important;
+  color: #fff !important;
 }
 
 // Loading animation mejorada

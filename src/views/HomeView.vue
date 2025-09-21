@@ -134,16 +134,20 @@
     <section class="section cta-section">
       <div class="container">
         <div class="cta-content has-text-centered">
-          <h3 class="title is-3 has-text-white">¿Listo para probar lo mejor de la naturaleza?</h3>
-          <p class="subtitle is-5 has-text-white-ter mb-5">
-            Contáctanos hoy y descubre la diferencia de los productos verdaderamente frescos
-          </p>
-          <button class="button is-light is-large">
-            <span class="icon">
-              <i class="fas fa-phone"></i>
-            </span>
-            <span>Contactar Ahora</span>
-          </button>
+          <div class="cta-card">
+            <h3 class="title is-3 has-text-white mb-3">
+              ¿Listo para probar lo mejor de la naturaleza?
+            </h3>
+            <p class="subtitle is-5 has-text-white-ter mb-4">
+              Contáctanos hoy y descubre la diferencia de los productos verdaderamente frescos.
+            </p>
+            <a href="https://wa.me/526623299654" target="_blank" class="button is-light is-large cta-contact-btn ml-2">
+  <span class="icon">
+    <i class="fab fa-whatsapp"></i>
+  </span>
+  <span>WhatsApp</span>
+</a>
+          </div>
         </div>
       </div>
     </section>
@@ -418,6 +422,18 @@ export default {
 
 .cta-content {
   padding: 2rem 0;
+}
+
+.cta-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.cta-card:hover {
+  transform: translateY(-5px);
 }
 
 /* Responsive Design */
