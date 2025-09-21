@@ -51,3 +51,34 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.page-category {
+  background: #221510;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(72, 187, 120, 0.12);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.is-size-2 {
+  color: #66bb6a;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(46, 125, 50, 0.15);
+}
+
+.columns {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  .page-category {
+    padding: 1rem 0.5rem;
+  }
+  .is-size-2 {
+    font-size: 2rem !important;
+  }
+}
+</style>
