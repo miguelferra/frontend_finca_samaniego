@@ -3,7 +3,7 @@
     <div class="box">
       <figure class="image mb-4">
         <img
-          :src="product.thumbnail_url"
+          :src="product.image_url"
           :alt="product.name"
           @error="handleImageError"
         />
@@ -67,7 +67,7 @@ export default {
   margin-right: -1.25rem;
   object-fit: cover;
   width: 100%;
-  height: 200px;
+  height: 250px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
 }
