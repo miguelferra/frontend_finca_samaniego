@@ -38,12 +38,17 @@
               >
                 Nosotros
               </router-link>
+
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
+                <router-link
+                  to="/productos"
+                  class="navbar-link"
+                  @click="closeMobileMenu"
+                >
                   <span class="icon-text">
                     <span>Productos</span>
                   </span>
-                </a>
+                </router-link>
                 <div class="navbar-dropdown">
                   <router-link
                     to="/salsa_chiltepin"
@@ -380,7 +385,17 @@ $accent-color: #ff6b6b;
   border-radius: 2px;
 }
 
-.navbar-burger span:nth-child(1) { top: 0; }
-.navbar-burger span:nth-child(2) { top: 9px; }
-.navbar-burger span:nth-child(3) { bottom: 0; }
+.navbar-burger span:nth-child(1) {
+  top: 0;
+}
+.navbar-burger span:nth-child(2) {
+  top: 9px;
+}
+.navbar-burger span:nth-child(3) {
+  bottom: 0;
+}
+html, body {
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
 </style>

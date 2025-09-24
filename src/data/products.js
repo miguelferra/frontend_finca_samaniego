@@ -14,30 +14,42 @@ export const allProducts = [
     "get_absolute_url": "/salsa_chiltepin/salsa_el_vado"
   },
   {
-    "id": 1,
-    "name": "Chiltepin de 50g",
-    "slug": "chiltepin-50-g",
-    "description": "Una presentación para lo que están empezando.",
-    "price": "150.00",
-    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758511259/unique_image_name.png",
-    "thumbnail_url": "http://res.cloudinary.com/dtfgigvrb/image/upload/c_fill,f_auto,h_200,q_auto,w_300/gsxgphc3fdy09oyvpbok.jpg",
-    "date_added": "2025-07-26T01:41:22.222457Z",
+    "id": 4, // ID nuevo para el producto estrella
+    "name": "Chiltepín 60g (1/4 de litro)",
+    "slug": "chiltepin-60g-oro-rojo",
+    "description": "Nuestro oro rojo. El auténtico chiltepín silvestre de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
+    "price": "250.00", // Puedes ajustar el precio
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758683595/unique_image_name.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/w_250,h_250,c_thumb,f_auto,q_auto/v1758683595/unique_image_name.png",
+    "date_added": "2025-09-21T02:15:44.821Z", // Fecha de hoy
     "category_slug": "chiltepin_entero",
     "category_name": "Chiltepin Entero",
-    "get_absolute_url": "/chiltepin_entero/chiltepin-50-g"
+    "get_absolute_url": "/chiltepin_entero/chiltepin-60g-oro-rojo"
+  },
+  {
+    "id": 1,
+    "name": "Chiltepín de 10g",
+    "slug": "chiltepin-10g",
+    "description": "La dosis perfecta de picor para conocer el auténtico chiltepín silvestre de la sierra. ¡Ideal para probarlo!",
+    "price": "60.00", // Puedes ajustar el precio
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758511259/unique_image_name.png",
+    "thumbnail_url": "http://res.cloudinary.com/dtfgigvrb/image/upload/c_fill,f_auto,h_200,q_auto,w_300/gsxgphc3fdy09oyvpbok.jpg",
+    "date_added": "2025-09-20T01:41:22.222457Z",
+    "category_slug": "chiltepin_entero",
+    "category_name": "Chiltepin Entero",
+    "get_absolute_url": "/chiltepin_entero/chiltepin-10g"
   },
   {
     "id": 2,
     "name": "Chiltepin Seco",
     "slug": "chiltepin-seco",
-    "description": "Una presentación para los que quieren algo mas especifico.",
-    "price": "100.00",
+    "description": "El picor legendario del chiltepín, sin complicaciones. Tu sazonador perfecto, siempre listo en tu cocina.",
+    "price": "70.00",
     "image_url": "http://res.cloudinary.com/dtfgigvrb/image/upload/v1758511398/unique_image_name.png",
     "thumbnail_url": "http://res.cloudinary.com/dtfgigvrb/image/upload/c_fill,f_auto,h_200,q_auto,w_300/hb0y5qvysxs01vx58new.jpg",
     "date_added": "2025-07-29T01:17:34.603290Z",
     "category_slug": "chiltepin_entero",
     "category_name": "Chiltepin Entero",
     "get_absolute_url": "/chiltepin_entero/chiltepin-seco"
-  },
-  
+  }
 ];

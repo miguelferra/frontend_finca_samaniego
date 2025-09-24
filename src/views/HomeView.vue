@@ -16,7 +16,10 @@
               Descubre nuestros productos frescos y orgánicos
             </h2>
             <div class="hero-buttons mt-5">
-              <a href="#productos" class="button is-products is-large hero-cta">
+              <a
+                class="button is-products is-large hero-cta"
+                @click.prevent="scrollToProducts"
+              >
                 <span class="icon">
                   <i class="fas fa-leaf"></i>
                 </span>
@@ -200,7 +203,7 @@ export default {
         // Sort products by date (most recent first)
         this.latestProducts = allProducts
           .sort((a, b) => new Date(b.date_added) - new Date(a.date_added))
-          .filter(product => product.available !== false); // Only show available products
+          .filter(product => product.available !== false);
           
         this.isLoading = false;
       } catch (error) {
@@ -229,6 +232,13 @@ export default {
       document.querySelectorAll('.stat-card').forEach(card => {
         observer.observe(card);
       });
+    },
+
+    scrollToProducts() {
+      const el = document.getElementById('productos');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 };
@@ -243,10 +253,11 @@ export default {
 /* Hero Section Enhancements */
 .hero-gradient {
   position: relative;
-  background-attachment: fixed;
+  background-attachment: scroll; /* Fix for mobile */
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
+  min-height: 400px;
 }
 
 .hero-overlay {

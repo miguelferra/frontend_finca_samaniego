@@ -34,11 +34,21 @@ const routes = [
     name: "Category",
     component: CategoryView,
   },
+  {
+    path: "/productos",
+    name: "AllProducts",
+    component: () => import("@/views/AllProductsView.vue"),
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // Always scroll to top
+    return { top: 0 };
+  }
 });
+
 
 export default router;
