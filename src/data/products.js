@@ -5,7 +5,7 @@ export const allProducts = [
     "name": "Salsa el Vado",
     "slug": "salsa_el_vado",
     "description": "El auténtico sabor de Sonora en cada gota. Nuestra receta familiar, hecha como en casa.",
-    "price": "150.00",
+    "price": "135.00",
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758512096/unique_image_name.png",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/w_250,h_250,c_thumb,f_auto,q_auto/v1758511470/unique_image_name.png",
     "date_added": "2025-08-06T01:42:36.626641Z",
@@ -18,7 +18,7 @@ export const allProducts = [
     "name": "Chiltepín 60g (1/4 de litro)",
     "slug": "chiltepin-60g-oro-rojo",
     "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
-    "price": "250.00", // Puedes ajustar el precio
+    "price": "150.00", // Puedes ajustar el precio
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758683595/unique_image_name.png",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/w_250,h_250,c_thumb,f_auto,q_auto/v1758683595/unique_image_name.png",
     "date_added": "2025-09-21T02:15:44.821Z", // Fecha de hoy
