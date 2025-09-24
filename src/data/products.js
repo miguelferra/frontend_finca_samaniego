@@ -17,7 +17,7 @@ export const allProducts = [
     "id": 4, // ID nuevo para el producto estrella
     "name": "Chiltepín 60g (1/4 de litro)",
     "slug": "chiltepin-60g-oro-rojo",
-    "description": "Nuestro oro rojo. El auténtico chiltepín silvestre de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
+    "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
     "price": "250.00", // Puedes ajustar el precio
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758683595/unique_image_name.png",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/w_250,h_250,c_thumb,f_auto,q_auto/v1758683595/unique_image_name.png",
@@ -30,7 +30,7 @@ export const allProducts = [
     "id": 1,
     "name": "Chiltepín de 10g",
     "slug": "chiltepin-10g",
-    "description": "La dosis perfecta de picor para conocer el auténtico chiltepín silvestre de la sierra. ¡Ideal para probarlo!",
+    "description": "La dosis perfecta de picor para conocer el auténtico chiltepín de la sierra. ¡Ideal para probarlo!",
     "price": "60.00", // Puedes ajustar el precio
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758511259/unique_image_name.png",
     "thumbnail_url": "http://res.cloudinary.com/dtfgigvrb/image/upload/c_fill,f_auto,h_200,q_auto,w_300/gsxgphc3fdy09oyvpbok.jpg",
