@@ -2,7 +2,7 @@
 export const allProducts = [
   {
     "id": 3,
-    "name": "Salsa el Vado",
+    "name": "🧑‍🍳 La Receta del Vado\nSalsa de Chiltepín",
     "slug": "salsa_el_vado",
     "description": "El auténtico sabor de Sonora en cada gota. Nuestra receta familiar, hecha como en casa.",
     "price": "135.00",
@@ -13,14 +13,27 @@ export const allProducts = [
     "category_name": "Salsa Chiltepin",
     "get_absolute_url": "/salsa_chiltepin/salsa_el_vado"
   },
+   {
+    "id": 5, // ID nuevo para el producto estrella
+    "name": "💥 La Reserva del Chiltepinero\n240g (1 Litro)",
+    "slug": "chiltepin-200g",
+    "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
+    "price": "450.00", // Puedes ajustar el precio
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822751/1lt_cc31hn.jpg",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822751/1lt_cc31hn.jpg",
+    "date_added": "2025-09-20T02:15:44.821Z", // Fecha de hoy
+    "category_slug": "chiltepin_entero",
+    "category_name": "Chiltepin Entero",
+    "get_absolute_url": "/chiltepin_entero/chiltepin-200g"
+  },
   {
     "id": 4, // ID nuevo para el producto estrella
-    "name": "Chiltepín 60g (1/4 de litro)",
+    "name": "🔥 El Favorito de la Cocina\n60g (¼ de Litro)",
     "slug": "chiltepin-60g-oro-rojo",
     "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
-    "price": "150.00", // Puedes ajustar el precio
-    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1758683595/unique_image_name.png",
-    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/w_250,h_250,c_thumb,f_auto,q_auto/v1758683595/unique_image_name.png",
+    "price": "120.00", // Puedes ajustar el precio
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822748/60g_fjuaym.jpg",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822748/60g_fjuaym.jpg",
     "date_added": "2025-09-21T02:15:44.821Z", // Fecha de hoy
     "category_slug": "chiltepin_entero",
     "category_name": "Chiltepin Entero",
@@ -28,20 +41,20 @@ export const allProducts = [
   },
   {
     "id": 1,
-    "name": "Chiltepín de 25g",
-    "slug": "chiltepin-25g",
+    "name": "🌶️La Dosis Perfecta\nChiltepín de 30g\n",
+    "slug": "chiltepin-30g",
     "description": "La dosis perfecta de picor para conocer el auténtico chiltepín de la sierra. ¡Ideal para probarlo!",
     "price": "60.00", // Puedes ajustar el precio
-    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760111557/entero_pbkjq8.png",
-    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760111557/entero_pbkjq8.png",
-    "date_added": "2025-09-20T01:41:22.222457Z",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760647988/30g_okmlmj.jpg",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760647988/30g_okmlmj.jpg",
+    "date_added": "2025-09-23T01:41:22.222457Z",
     "category_slug": "chiltepin_entero",
     "category_name": "Chiltepin Entero",
-    "get_absolute_url": "/chiltepin_entero/chiltepin-10g"
+    "get_absolute_url": "/chiltepin_entero/chiltepin-30g"
   },
   {
     "id": 2,
-    "name": "Chiltepin Seco",
+    "name": "🧂 El Vado Molido\nChiltepín en Polvo",
     "slug": "chiltepin-seco",
     "description": "El picor legendario del chiltepín, sin complicaciones. Tu sazonador perfecto, siempre listo en tu cocina.",
     "price": "70.00",

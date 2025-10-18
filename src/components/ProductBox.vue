@@ -8,7 +8,7 @@
           @error="handleImageError"
         />
       </figure>
-      <h3 class="is-size-4">{{ product.name }}</h3>
+      <h3 class="is-size-4 product-title">{{ product.name }}</h3>
       <p class="is-size-6 has-text-grey">${{ product.price }}</p>
       
       <router-link
@@ -98,5 +98,9 @@ export default {
   background: linear-gradient(135deg, #388e3c 0%, #66bb6a 100%);
   transform: translateY(-2px);
   color: #fff;
+}
+.product-title {
+  /* This tells the browser to collapse white space but preserve new lines */
+  white-space: pre-line;
 }
 </style>
