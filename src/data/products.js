@@ -11,13 +11,14 @@ export const allProducts = [
     "date_added": "2025-08-06T01:42:36.626641Z",
     "category_slug": "salsa_chiltepin",
     "category_name": "Salsa Chiltepin",
-    "get_absolute_url": "/salsa_chiltepin/salsa_el_vado"
+    "get_absolute_url": "/salsa_chiltepin/salsa_el_vado",
+    "coming_soon": true
   },
    {
     "id": 5, // ID nuevo para el producto estrella
     "name": "💥 La Reserva del Chiltepinero\n240g (1 Litro)",
     "slug": "chiltepin-200g",
-    "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
+    "description": "Para los verdaderos conocedores. Tu litro completo de la cosecha de Bacerac",
     "price": "450.00", // Puedes ajustar el precio
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822751/1lt_cc31hn.jpg",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822751/1lt_cc31hn.jpg",
@@ -30,7 +31,7 @@ export const allProducts = [
     "id": 4, // ID nuevo para el producto estrella
     "name": "🔥 El Favorito de la Cocina\n60g (¼ de Litro)",
     "slug": "chiltepin-60g-oro-rojo",
-    "description": "Nuestro oro rojo. El auténtico chiltepín de la sierra en su presentación más generosa. Para que el gran sabor y picor nunca te falten.",
+    "description": "Para los que el chiltepín no puede faltar en la mesa. El tamaño perfecto para las carnes asadas del fin de semana y la cocina del día a día.",
     "price": "120.00", // Puedes ajustar el precio
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822748/60g_fjuaym.jpg",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1760822748/60g_fjuaym.jpg",
@@ -63,6 +64,7 @@ export const allProducts = [
     "date_added": "2025-07-29T01:17:34.603290Z",
     "category_slug": "chiltepin_entero",
     "category_name": "Chiltepin Entero",
-    "get_absolute_url": "/chiltepin_entero/chiltepin-seco"
+    "get_absolute_url": "/chiltepin_entero/chiltepin-seco",
+    "coming_soon": true
   }
 ];

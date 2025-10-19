@@ -1,6 +1,11 @@
 <template>
   <div class="column is-4">
     <div class="box">
+        <!-- Coming soon badge -->
+        <div v-if="product.coming_soon" class="coming-soon-badge" aria-hidden="true">
+          <i class="fas fa-clock"></i>
+          Próximamente
+        </div>
       <figure class="image mb-4">
         <img
           :src="product.image_url"
@@ -8,15 +13,30 @@
           @error="handleImageError"
         />
       </figure>
-      <h3 class="is-size-4 product-title">{{ product.name }}</h3>
-      <p class="is-size-6 has-text-grey">${{ product.price }}</p>
+  <h3 class="is-size-4 product-title">{{ product.name }}</h3>
+  <!-- Show price only when product is available; otherwise a small label -->
+  <p v-if="!product.coming_soon" class="is-size-6 has-text-grey">${{ product.price }}</p>
+  <p v-else class="is-size-6 price-soon" aria-hidden="true">Disponible Muy Pronto</p>
       
-      <router-link
-        :to="product.get_absolute_url"
-        class="button is-dark mt-4"
-      >
-        Ver detalles
-      </router-link>
+      <!-- If product is coming soon, show disabled button; otherwise a normal router-link -->
+      <div class="mt-4">
+        <router-link
+          v-if="!product.coming_soon"
+          :to="product.get_absolute_url"
+          class="button is-dark"
+          >
+          Ver detalles
+        </router-link>
+
+        <button
+          v-else
+          class="button is-dark disabled"
+          aria-disabled="true"
+          disabled
+        >
+          Ver detalles
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -102,5 +122,52 @@ export default {
 .product-title {
   /* This tells the browser to collapse white space but preserve new lines */
   white-space: pre-line;
+}
+
+/* Coming soon badge */
+.coming-soon-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #ffb74d 0%, #ff8a65 100%);
+  color: #221510;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 10;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coming-soon-badge i {
+  font-size: 0.9rem;
+}
+
+/* Disabled button state */
+.button.is-dark.disabled,
+.button.is-dark[disabled] {
+  background: linear-gradient(135deg, #9e9e9e 0%, #bdbdbd 100%);
+  color: #333 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  opacity: 0.9;
+}
+
+/* Ensure the box container can position the badge */
+.box {
+  position: relative;
+}
+
+/* Price placeholder for coming soon products */
+.price-soon {
+  background: rgba(255, 183, 77, 0.06);
+  border: 1px dashed rgba(255,183,77,0.18);
+  color: #f5e6d8;
+  margin-bottom: 0.3rem;
 }
 </style>

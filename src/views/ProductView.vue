@@ -143,6 +143,7 @@
             class="column is-3"
           >
             <router-link
+              v-if="!relatedProduct.coming_soon"
               :to="relatedProduct.get_absolute_url"
               class="related-product-card"
             >
@@ -150,6 +151,15 @@
               <h4>{{ relatedProduct.name }}</h4>
               <p class="related-price">${{ relatedProduct.price }}</p>
             </router-link>
+            <div v-else class="related-product-card disabled">
+              <img :src="relatedProduct.image_url" :alt="relatedProduct.name" />
+              <h4>{{ relatedProduct.name }}</h4>
+              <p class="related-price price-soon">Disponible Muy Pronto</p>
+              <div class="coming-soon-badge">
+                <i class="fas fa-clock"></i>
+                Próximamente
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -653,6 +663,46 @@ export default {
 .related-price {
   color: #66bb6a;
   font-weight: 600;
+}
+
+.related-product-card.disabled {
+  position: relative;
+  cursor: default;
+  opacity: 0.9;
+}
+
+.related-product-card.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.price-soon {
+  background: rgba(255, 183, 77, 0.06);
+  border: 1px dashed rgba(255,183,77,0.18);
+  color: #f5e6d8;
+  margin-bottom: 0.3rem;
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #ffb74d 0%, #ff8a65 100%);
+  color: #221510;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 10;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coming-soon-badge i {
+  font-size: 0.9rem;
 }
 
 .not-found {

@@ -35,51 +35,103 @@
     </section>
 
     <section class="section py-5">
-  <div class="container">
-    <div class="columns is-multiline has-text-centered">
-
-      <div class="column is-3-desktop is-6-tablet">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-map-marker-alt"></i>
+      <div class="container">
+        <div class="columns is-multiline has-text-centered">
+          <div class="column is-3-desktop is-6-tablet">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fas fa-pepper-hot"></i>
+              </div>
+              <div class="stat-number">100% Chiltepín</div>
+              <div class="stat-label">Sin mezclas ni aditivos</div>
+            </div>
           </div>
-          <div class="stat-number">Origen Auténtico</div>
-          <div class="stat-label">Sierra de Bacerac, Sonora</div>
-        </div>
-      </div>
 
-      <div class="column is-3-desktop is-6-tablet">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-hands"></i> </div>
-          <div class="stat-number">Proceso Artesanal</div>
-          <div class="stat-label">Cosechado a mano</div>
-        </div>
-      </div>
-
-      <div class="column is-3-desktop is-6-tablet">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-leaf"></i>
+          <div class="column is-3-desktop is-6-tablet">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-hands"></i>
+              </div>
+              <div class="stat-number">Proceso Artesanal</div>
+              <div class="stat-label">Cosechado a mano</div>
+            </div>
           </div>
-          <div class="stat-number">Ingredientes Naturales</div>
-          <div class="stat-label">Sin conservadores</div>
-        </div>
-      </div>
 
-      <div class="column is-3-desktop is-6-tablet">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-check-circle"></i>
+          <div class="column is-3-desktop is-6-tablet">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="stat-number">Ingredientes Naturales</div>
+              <div class="stat-label">Sin conservadores</div>
+            </div>
           </div>
-          <div class="stat-number">Calidad Garantizada</div>
-          <div class="stat-label">Del campo a tu mesa</div>
+
+          <div class="column is-3-desktop is-6-tablet">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-number">Calidad Garantizada</div>
+              <div class="stat-label">Del campo a tu mesa</div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
-</section>
+    <!-- Location Map Section -->
+    <section class="section py-5">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-6">
+            <div class="location-content">
+              <h2 class="title is-3 has-text-green mb-4">
+                Ubicados en Bacerac, Sonora
+              </h2>
+              <p class="subtitle is-5 has-text-muted mb-4 full-description">
+                Nuestra finca se encuentra en el corazón de la Sierra Alta de
+                Sonora, una región privilegiada que nos permite cultivar
+                productos de la más alta calidad.
+              </p>
+              <p class="subtitle is-5 has-text-muted mb-4 short-description">
+                Nuestra finca se encuentra en el corazón de la Sierra Alta de
+                Sonora
+              </p>
+              <div class="tags">
+                <span class="tag is-medium location-tag">
+                  <span class="icon">
+                    <i class="fas fa-mountain"></i>
+                  </span>
+                  <span>Sierra Alta</span>
+                </span>
+                <span class="tag is-medium location-tag">
+                  <span class="icon">
+                    <i class="fas fa-cloud"></i>
+                  </span>
+                  <span>Clima Ideal</span>
+                </span>
+                <span class="tag is-medium location-tag">
+                  <span class="icon">
+                    <i class="fas fa-seedling"></i>
+                  </span>
+                  <span>Tierra Fértil</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="map-container">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Mapa_Municipios_Sonora_Bacerac.png"
+                alt="Mapa de Bacerac, Sonora"
+                class="location-map"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Products Section -->
     <section class="section" id="productos">
@@ -87,9 +139,7 @@
         <div class="columns is-multiline">
           <div class="column is-12">
             <div class="section-header has-text-centered mb-6">
-              <h2 class="title is-2">
-                Nuestros Productos
-              </h2>
+              <h2 class="title is-2">Nuestros Productos</h2>
               <p class="subtitle is-5 has-text-grey">
                 Los productos más frescos directamente de nuestra finca
               </p>
@@ -117,22 +167,30 @@
           </template>
 
           <!-- Show More Button -->
-          <div v-if="!showAllProducts && latestProducts.length > initialProductCount" 
-               class="column is-12 has-text-centered mt-4">
-            <button 
+          <div
+            v-if="
+              !showAllProducts && latestProducts.length > initialProductCount
+            "
+            class="column is-12 has-text-centered mt-4"
+          >
+            <button
               class="button is-success is-medium"
               @click="showAllProducts = true"
             >
               <span class="icon">
                 <i class="fas fa-plus"></i>
               </span>
-              <span>Ver Más Productos ({{ latestProducts.length - initialProductCount }} más)</span>
+              <span
+                >Ver Más Productos ({{
+                  latestProducts.length - initialProductCount
+                }}
+                más)</span
+              >
             </button>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Call to Action Section -->
     <section class="section cta-section">
       <div class="container">
@@ -142,14 +200,19 @@
               ¿Listo para probar lo mejor de la naturaleza?
             </h3>
             <p class="subtitle is-5 has-text-white-ter mb-4">
-              Contáctanos hoy y descubre la diferencia de los productos verdaderamente frescos.
+              Contáctanos hoy y descubre la diferencia de los productos
+              verdaderamente frescos.
             </p>
-            <a href="https://wa.me/526623299654" target="_blank" class="button is-light is-large cta-contact-btn ml-2">
-  <span class="icon">
-    <i class="fab fa-whatsapp"></i>
-  </span>
-  <span>WhatsApp</span>
-</a>
+            <a
+              href="https://wa.me/526623299654"
+              target="_blank"
+              class="button is-light is-large cta-contact-btn ml-2"
+            >
+              <span class="icon">
+                <i class="fab fa-whatsapp"></i>
+              </span>
+              <span>WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
@@ -163,14 +226,14 @@ import { allProducts } from "@/data/products.js";
 
 export default {
   name: "HomeView",
-  
+
   components: {
-    ProductBox
+    ProductBox,
   },
 
   data() {
     return {
-      imageUrl: '/background.jpg',
+      imageUrl: "/background.jpg",
       latestProducts: [],
       isLoading: true,
       showAllProducts: false,
@@ -180,16 +243,17 @@ export default {
 
   computed: {
     displayedProducts() {
-      return this.showAllProducts 
-        ? this.latestProducts 
+      return this.showAllProducts
+        ? this.latestProducts
         : this.latestProducts.slice(0, this.initialProductCount);
-    }
+    },
   },
 
   mounted() {
     this.loadProducts();
-    document.title = 'Bienvenidos | Finca Samaniego - Productos Frescos y Orgánicos';
-    
+    document.title =
+      "Bienvenidos | Finca Samaniego - Productos Frescos y Orgánicos";
+
     // Add scroll animations
     this.observeElements();
   },
@@ -198,16 +262,16 @@ export default {
     async loadProducts() {
       try {
         // Simulate loading delay for better UX
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         // Sort products by date (most recent first)
         this.latestProducts = allProducts
           .sort((a, b) => new Date(b.date_added) - new Date(a.date_added))
-          .filter(product => product.available !== false);
-          
+          .filter((product) => product.available !== false);
+
         this.isLoading = false;
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error("Error loading products:", error);
         this.isLoading = false;
       }
     },
@@ -216,36 +280,36 @@ export default {
       // Intersection Observer for scroll animations
       const observer = new IntersectionObserver(
         (entries) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('animate-in');
+              entry.target.classList.add("animate-in");
             }
           });
         },
         {
           threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
+          rootMargin: "0px 0px -50px 0px",
         }
       );
 
       // Observe stat cards
-      document.querySelectorAll('.stat-card').forEach(card => {
+      document.querySelectorAll(".stat-card").forEach((card) => {
         observer.observe(card);
       });
     },
 
     scrollToProducts() {
-      const el = document.getElementById('productos');
+      const el = document.getElementById("productos");
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: "smooth" });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.is-products{
+.is-products {
   background: #66bb6a;
   color: white;
   border: none;
@@ -421,8 +485,12 @@ export default {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Call to Action Section */
@@ -452,24 +520,67 @@ export default {
   .hero-title {
     font-size: 2.5rem !important;
   }
-  
+
   .hero-subtitle {
     font-size: 1.25rem !important;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .hero-cta,
   .hero-cta-secondary {
     width: 100%;
     max-width: 300px;
   }
-  
+
   .stat-card {
     margin-bottom: 1rem;
+  }
+
+  .section.py-5 {
+    padding-top: 0rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* Location section responsive */
+  .columns.is-vcentered {
+    flex-direction: column-reverse;
+  }
+
+  .column.is-6 {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .location-content {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .map-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .location-map {
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .tags {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .location-tag {
+    margin: 0.25rem;
+  }
+  .mb-4 {
+    margin-bottom: 0rem !important;
   }
 }
 
@@ -477,13 +588,59 @@ export default {
   .hero-title {
     font-size: 2rem !important;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .stat-icon {
     font-size: 2.5rem;
+  }
+
+  /* Location section mobile */
+  .location-content {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .location-content .title.is-3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .location-content .subtitle.is-5 {
+    font-size: 1rem !important;
+  }
+
+  .location-content .tags {
+    display: none;
+  }
+
+  .full-description {
+    display: none !important;
+  }
+
+  .short-description {
+    display: block !important;
+  }
+
+  .map-container {
+    padding: 0.5rem;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .location-map {
+    max-height: 250px;
+    border-width: 2px;
+  }
+
+  .section.py-5 {
+    padding-top: 0rem !important;
+    padding-bottom: 1rem !important;
+  }
+  .mb-4 {
+    margin-bottom: 0rem !important;
   }
 }
 
@@ -491,6 +648,75 @@ export default {
 .button:focus {
   outline: 2px solid #2e7d32;
   outline-offset: 2px;
+}
+
+/* Location Map Section */
+.location-content {
+  padding: 1rem;
+  background: rgba(84, 75, 75, 0.6);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(72, 187, 120, 0.12);
+}
+
+.full-description {
+  display: block;
+}
+
+.short-description {
+  display: none;
+}
+
+.has-text-green {
+  color: #66bb6a !important;
+}
+
+.has-text-muted {
+  color: #b5b5b5 !important;
+}
+
+.map-container {
+  position: relative;
+  padding: 1rem;
+  background: rgba(84, 75, 75, 0.6);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(72, 187, 120, 0.15);
+  transition: transform 0.3s ease;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.map-container:hover {
+  transform: translateY(-5px);
+}
+
+.location-map {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid #66bb6a;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.location-tag {
+  background: #2e7d32 !important;
+  color: white !important;
+  border: none;
+  margin-right: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.location-tag:hover {
+  transform: translateY(-2px);
+  background: #388e3c !important;
+}
+
+.location-tag .icon {
+  margin-right: 0.5rem;
 }
 
 /* Smooth scrolling */
