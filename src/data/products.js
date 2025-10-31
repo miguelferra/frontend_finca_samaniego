@@ -66,5 +66,18 @@ export const allProducts = [
     "category_name": "Chiltepin Entero",
     "get_absolute_url": "/chiltepin_entero/chiltepin-seco",
     "coming_soon": true
+  },
+ {
+    "id": 6,
+    "name": "✨ El Oro Tostado\nSalsa Macha de Chiltepín",
+    "slug": "salsa-macha-oro-tostado",
+    "description": "Textura rústica, sabor profundo. Ajo dorado, semillas tostadas y el golpe exacto del chiltepín de la sierra. El toque 'crunch' perfecto.",
+    "price": "150.00",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1761888205/salsa1v_w9auvm.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1761888205/salsa1v_w9auvm.png",
+    "date_added": "2025-11-26T03:00:00.000Z",
+    "category_slug": "salsa_chiltepin",
+    "category_name": "Salsa Chiltepin",
+    "get_absolute_url": "/salsa_chiltepin/salsa-macha-oro-tostado"
   }
 ];
