@@ -9,7 +9,7 @@
         <span class="icon"><i class="fas fa-envelope"></i></span>
         <span>Email</span>
       </a>
-      <a href="https://wa.me/526623299654" class="button is-success is-large contact-btn" target="_blank">
+      <a href="https://wa.me/523313832186" class="button is-success is-large contact-btn" target="_blank">
         <span class="icon"><i class="fab fa-whatsapp"></i></span>
         <span>WhatsApp</span>
       </a>
