@@ -103,7 +103,7 @@
         <p>
           <!-- WhatsApp -->
           <a
-            href="https://wa.me/526623299654"
+            href="https://wa.me/523313832186"
             target="_blank"
             class="footer-link"
             aria-label="WhatsApp"

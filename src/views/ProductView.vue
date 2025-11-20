@@ -255,7 +255,7 @@ export default {
     },
 
     getWhatsAppLink() {
-      const phoneNumber = "526623299654";
+      const phoneNumber = "523313832186";
       const message = `Hola! Me interesa ordenar ${this.quantity} unidad(es) de ${this.product.name}. ¿Está disponible?`;
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     },
