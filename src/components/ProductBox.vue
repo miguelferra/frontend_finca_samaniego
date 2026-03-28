@@ -156,15 +156,13 @@ export default {
 }
 
 .image img {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   aspect-ratio: 4 / 3;
-  min-height: 280px;
-  padding: 1rem;
+  min-height: 260px;
   border-radius: 18px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
   transition: transform 0.4s ease;
-  background: rgba(255, 255, 255, 0.02);
 }
 
 .product-card:hover .image img {
