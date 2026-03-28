@@ -66,6 +66,22 @@
                 </div>
               </div>
 
+              <!-- Beneficios Section - RESTORED & REFINED -->
+              <div class="benefits-strip mb-5">
+                <div class="benefit-tag">
+                  <i class="fas fa-leaf"></i>
+                  <span>100% Natural</span>
+                </div>
+                <div class="benefit-tag">
+                  <i class="fas fa-hands"></i>
+                  <span>Artesanal</span>
+                </div>
+                <div class="benefit-tag">
+                  <i class="fas fa-seedling"></i>
+                  <span>Sin aditivos</span>
+                </div>
+              </div>
+
               <div class="action-section">
                 <div class="quantity-selector" v-if="product.isAvailable">
                   <label for="quantity-input">Cantidad</label>
@@ -129,6 +145,34 @@
           </div>
         </div>
       </div>
+
+      <!-- Process/Ingredients Section - RESTORED & REFINED -->
+      <section class="details-section section">
+        <div class="columns is-variable is-8">
+          <div class="column is-6">
+            <div class="detail-box r-box">
+              <h3 class="title is-4 has-text-white mb-3">
+                <i class="fas fa-vial mr-2 has-text-green"></i>
+                Ingredientes
+              </h3>
+              <p class="has-text-muted">
+                Solo lo esencial: Chiltepín puro de la sierra sonorense, agua de manantial, sal de mar y el toque justo de especias regionales. Sin conservadores artificiales ni colorantes.
+              </p>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="detail-box">
+              <h3 class="title is-4 has-text-white mb-3">
+                <i class="fas fa-sync-alt mr-2 has-text-green"></i>
+                Proceso artesanal
+              </h3>
+              <p class="has-text-muted">
+                Cada lote se prepara a mano, respetando los tiempos de maduración y las recetas que han pasado de generación en generación en Bacerac.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section class="related-products" v-if="relatedProducts.length > 0">
         <div class="related-header">
@@ -309,7 +353,7 @@ export default {
 }
 
 .product-body {
-  padding: 1.5rem 1.8rem 2rem;
+  padding: 1.5rem 1.8rem 1rem;
 }
 
 .product-image-card {
@@ -393,7 +437,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .highlight-card {
@@ -418,13 +462,61 @@ export default {
   margin-bottom: 0.4rem;
 }
 
+/* Benefits Strip Styling */
+.benefits-strip {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.benefit-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(102, 187, 106, 0.08);
+  border: 1px solid rgba(102, 187, 106, 0.12);
+  color: #f1e7de;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.benefit-tag i {
+  color: #66bb6a;
+}
+
+/* Details Section Styling */
+.details-section {
+  padding: 2rem 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 1rem 0;
+}
+
+.detail-box {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: 24px;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.has-text-green {
+  color: #66bb6a !important;
+}
+
+.has-text-muted {
+  color: #ccb8a5 !important;
+}
+
 .action-section {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 1.5rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin: 1.5rem 0 2rem;
 }
 
 .quantity-selector label {
@@ -450,6 +542,7 @@ export default {
   width: 38px;
   height: 38px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .quantity-input {
@@ -520,7 +613,7 @@ export default {
 }
 
 .related-products {
-  padding: 0 1.8rem 2rem;
+  padding: 2rem 1.8rem;
 }
 
 .related-header {
@@ -635,6 +728,14 @@ export default {
 
   .buttons-container {
     width: 100%;
+  }
+
+  .details-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .detail-box {
+    margin-bottom: 1rem;
   }
 }
 </style>

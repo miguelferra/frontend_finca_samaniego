@@ -36,6 +36,50 @@
       </div>
     </section>
 
+    <!-- Ubicación Section - RE-ADDED -->
+    <section class="section py-6">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-6">
+            <div class="location-content">
+              <p class="section-kicker">Nuestra Tierra</p>
+              <h2 class="title is-2 has-text-white mb-4">
+                Ubicados en Bacerac, Sonora
+              </h2>
+              <p class="subtitle is-5 has-text-muted mb-5">
+                Nuestra finca se encuentra en el corazón de la Sierra Alta de
+                Sonora, una región privilegiada que nos permite cultivar
+                productos con el sabor más auténtico.
+              </p>
+              <div class="tags location-tags">
+                <span class="tag is-medium location-tag">
+                  <span class="icon">
+                    <i class="fas fa-mountain"></i>
+                  </span>
+                  <span>Sierra Alta</span>
+                </span>
+                <span class="tag is-medium location-tag">
+                  <span class="icon">
+                    <i class="fas fa-seedling"></i>
+                  </span>
+                  <span>Tierra Fértil</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="map-container">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Mapa_Municipios_Sonora_Bacerac.png"
+                alt="Mapa de Bacerac, Sonora"
+                class="location-map"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="productos">
       <div class="container">
         <div class="catalog-surface">
@@ -264,18 +308,53 @@ export default {
   transform: translateY(-2px);
 }
 
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.2s;
+/* Location Section Styles */
+.section-kicker {
+  color: #ffd27d;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.has-text-muted {
+  color: #ccb8a5 !important;
+}
+
+.location-content {
+  padding-right: 2rem;
+}
+
+.location-tags {
+  margin-top: 1.5rem;
+}
+
+.location-tag {
+  background: rgba(102, 187, 106, 0.14) !important;
+  color: #81e687 !important;
+  border: 1px solid rgba(102, 187, 106, 0.18);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+}
+
+.map-container {
+  background: rgba(34, 21, 16, 0.6);
+  border-radius: 30px;
+  padding: 1.5rem;
+  border: 1px solid rgba(240, 218, 188, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  max-width: 440px;
+  margin-left: auto;
+}
+
+.location-map {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 2px solid #66bb6a;
+  filter: brightness(0.9) contrast(1.1);
 }
 
 .catalog-surface {
@@ -330,6 +409,13 @@ export default {
   animation: fadeInUp 0.6s ease forwards;
 }
 
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .show-more-btn {
   background: transparent;
   border: 1px solid rgba(102, 187, 106, 0.32);
@@ -367,6 +453,16 @@ export default {
 
   .hero-subtitle {
     font-size: 1.25rem !important;
+  }
+
+  .location-content {
+    padding-right: 0;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .map-container {
+    margin: 0 auto;
   }
 
   .hero-buttons {
