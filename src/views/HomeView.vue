@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <section
-      class="hero is-medium is-dark mb-6 hero-gradient"
+      class="hero is-medium is-dark hero-gradient"
       :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
     >
       <div class="hero-overlay"></div>
@@ -36,7 +36,43 @@
       </div>
     </section>
 
-    <!-- Ubicación Section - RE-ADDED -->
+    <!-- Sleek Value Bar - RE-ADDED & REFINED -->
+    <div class="value-bar-container">
+      <div class="container">
+        <div class="value-bar">
+          <div class="value-item">
+            <i class="fas fa-pepper-hot"></i>
+            <div class="value-text">
+              <strong>100% Chiltepín</strong>
+              <span>Sin mezclas ni aditivos</span>
+            </div>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-hands"></i>
+            <div class="value-text">
+              <strong>Artesanal</strong>
+              <span>Cosechado a mano</span>
+            </div>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-leaf"></i>
+            <div class="value-text">
+              <strong>Natural</strong>
+              <span>Sin conservadores</span>
+            </div>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-check-circle"></i>
+            <div class="value-text">
+              <strong>Calidad</strong>
+              <span>Del campo a tu mesa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ubicación Section -->
     <section class="section py-6">
       <div class="container">
         <div class="columns is-vcentered">
@@ -205,6 +241,7 @@ export default {
   min-height: 520px;
   border-radius: 32px;
   overflow: hidden;
+  margin-bottom: 0 !important;
 }
 
 .hero-overlay {
@@ -306,6 +343,46 @@ export default {
   background: rgba(255, 248, 239, 0.18);
   color: #fff;
   transform: translateY(-2px);
+}
+
+/* Value Bar Styling - REFINED */
+.value-bar-container {
+  background: rgba(18, 11, 8, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 0;
+}
+
+.value-bar {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.value-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.value-item i {
+  font-size: 1.5rem;
+  color: #66bb6a;
+}
+
+.value-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.value-text strong {
+  color: #fff7ed;
+  font-size: 1rem;
+}
+
+.value-text span {
+  color: #ccb8a5;
+  font-size: 0.85rem;
 }
 
 /* Location Section Styles */
@@ -453,6 +530,16 @@ export default {
 
   .hero-subtitle {
     font-size: 1.25rem !important;
+  }
+
+  .value-bar {
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+
+  .value-item {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
   .location-content {
