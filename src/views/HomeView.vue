@@ -31,153 +31,6 @@
                 Hacer un pedido
               </router-link>
             </div>
-            <div class="hero-pills">
-              <span class="hero-pill">
-                <strong>{{ catalogStats.totalProducts }}</strong> presentaciones
-              </span>
-              <span class="hero-pill">
-                <strong>{{ catalogStats.availableProducts }}</strong> disponibles
-              </span>
-              <span class="hero-pill">
-                <strong>{{ catalogStats.categories.length }}</strong> líneas de
-                producto
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section py-5">
-      <div class="container">
-        <div class="columns is-multiline has-text-centered">
-          <div class="column is-3-desktop is-6-tablet">
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fas fa-pepper-hot"></i>
-              </div>
-              <div class="stat-number">100% Chiltepín</div>
-              <div class="stat-label">Sin mezclas ni aditivos</div>
-            </div>
-          </div>
-
-          <div class="column is-3-desktop is-6-tablet">
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-hands"></i>
-              </div>
-              <div class="stat-number">Proceso Artesanal</div>
-              <div class="stat-label">Cosechado a mano</div>
-            </div>
-          </div>
-
-          <div class="column is-3-desktop is-6-tablet">
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-leaf"></i>
-              </div>
-              <div class="stat-number">Ingredientes Naturales</div>
-              <div class="stat-label">Sin conservadores</div>
-            </div>
-          </div>
-
-          <div class="column is-3-desktop is-6-tablet">
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-check-circle"></i>
-              </div>
-              <div class="stat-number">Calidad Garantizada</div>
-              <div class="stat-label">Del campo a tu mesa</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section py-5 feature-strip">
-      <div class="container">
-        <div class="columns is-variable is-5">
-          <div class="column is-6">
-            <article class="feature-card">
-              <p class="feature-eyebrow">Selección curada</p>
-              <h3>Un catálogo corto, con intención</h3>
-              <p>
-                Cada producto nace de la misma lógica: sabor sonorense,
-                proceso cuidado y una historia clara detrás de cada frasco o
-                presentación.
-              </p>
-            </article>
-          </div>
-          <div class="column is-6">
-            <article class="feature-card feature-card-soft">
-              <p class="feature-eyebrow">Colecciones</p>
-              <div class="collection-pills">
-                <span
-                  v-for="category in categoryHighlights"
-                  :key="category.slug"
-                  class="collection-pill"
-                >
-                  <i class="fas fa-seedling"></i>
-                  {{ category.name }}
-                </span>
-              </div>
-              <p class="feature-footnote">
-                También mostramos próximos lanzamientos para que el catálogo
-                comunique lo que ya puedes pedir y lo que viene en camino.
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section py-5">
-      <div class="container">
-        <div class="columns is-vcentered">
-          <div class="column is-6">
-            <div class="location-content">
-              <h2 class="title is-3 has-text-green mb-4">
-                Ubicados en Bacerac, Sonora
-              </h2>
-              <p class="subtitle is-5 has-text-muted mb-4 full-description">
-                Nuestra finca se encuentra en el corazón de la Sierra Alta de
-                Sonora, una región privilegiada que nos permite cultivar
-                productos de la más alta calidad.
-              </p>
-              <p class="subtitle is-5 has-text-muted mb-4 short-description">
-                Nuestra finca se encuentra en el corazón de la Sierra Alta de
-                Sonora
-              </p>
-              <div class="tags">
-                <span class="tag is-medium location-tag">
-                  <span class="icon">
-                    <i class="fas fa-mountain"></i>
-                  </span>
-                  <span>Sierra Alta</span>
-                </span>
-                <span class="tag is-medium location-tag">
-                  <span class="icon">
-                    <i class="fas fa-cloud"></i>
-                  </span>
-                  <span>Clima Ideal</span>
-                </span>
-                <span class="tag is-medium location-tag">
-                  <span class="icon">
-                    <i class="fas fa-seedling"></i>
-                  </span>
-                  <span>Tierra Fértil</span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="map-container">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Mapa_Municipios_Sonora_Bacerac.png"
-                alt="Mapa de Bacerac, Sonora"
-                class="location-map"
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -197,11 +50,7 @@
             <div class="catalog-summary">
               <span class="summary-pill">
                 <i class="fas fa-check-circle"></i>
-                {{ catalogStats.availableProducts }} listos para pedido
-              </span>
-              <span class="summary-pill is-muted">
-                <i class="fas fa-clock"></i>
-                {{ catalogStats.comingSoonProducts }} próximos lanzamientos
+                {{ catalogStats.availableProducts }} disponibles
               </span>
             </div>
           </div>
@@ -243,7 +92,7 @@
             </h3>
             <p class="subtitle is-5 has-text-white-ter mb-4">
               Escríbenos y te ayudamos a elegir la presentación correcta para
-              tu cocina, regalo o pedido especial.
+              tu cocina o pedido especial.
             </p>
             <a
               href="https://wa.me/523313832186"
@@ -276,8 +125,7 @@ export default {
     return {
       imageUrl: "/background.jpg",
       showAllProducts: false,
-      initialProductCount: 4,
-      observer: null,
+      initialProductCount: 6,
     };
   },
   computed: {
@@ -287,50 +135,13 @@ export default {
     catalogStats() {
       return getCatalogStats();
     },
-    categoryHighlights() {
-      return this.catalogStats.categories.map((slug) => {
-        const firstProduct = this.latestProducts.find(
-          (product) => product.category_slug === slug
-        );
-
-        return {
-          slug,
-          name: firstProduct?.category_name || slug,
-        };
-      });
-    },
     displayedProducts() {
       return this.showAllProducts
         ? this.latestProducts
         : this.latestProducts.slice(0, this.initialProductCount);
     },
   },
-  mounted() {
-    this.observeElements();
-  },
-  beforeUnmount() {
-    this.observer?.disconnect();
-  },
   methods: {
-    observeElements() {
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animate-in");
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        }
-      );
-
-      document.querySelectorAll(".stat-card, .feature-card").forEach((card) => {
-        this.observer.observe(card);
-      });
-    },
     scrollToProducts() {
       const el = document.getElementById("productos");
       if (el) {
@@ -360,8 +171,8 @@ export default {
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(46, 125, 50, 0.4) 100%
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(46, 125, 50, 0.45) 100%
   );
   z-index: 1;
 }
@@ -413,34 +224,11 @@ export default {
   flex-wrap: wrap;
 }
 
-.hero-pills {
-  display: flex;
-  justify-content: center;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-}
-
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.7rem 1rem;
-  border-radius: 999px;
-  background: rgba(18, 11, 8, 0.48);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #fff8ef;
-}
-
-.hero-pill strong {
-  color: #9df8a4;
-}
-
 .is-products,
 .hero-cta-secondary {
   border-radius: 999px;
   min-height: 54px;
-  padding-inline: 1.5rem;
+  padding-inline: 1.8rem;
   font-weight: 700;
 }
 
@@ -476,124 +264,11 @@ export default {
   transform: translateY(-2px);
 }
 
-.stat-card {
-  background: rgba(84, 75, 75, 0.72);
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 2rem 1rem;
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
-  transition: all 0.3s ease;
+.fade-in-up {
   opacity: 0;
   transform: translateY(30px);
-}
-
-.stat-card.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.stat-icon {
-  font-size: 3rem;
-  color: #2e7d32;
-  margin-bottom: 1rem;
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #66bb6a;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 1rem;
-  color: gray;
-  font-weight: 600;
-}
-
-.feature-strip {
-  padding-top: 0.5rem !important;
-}
-
-.feature-card {
-  background: linear-gradient(180deg, rgba(93, 61, 50, 0.78) 0%, rgba(44, 27, 22, 0.92) 100%);
-  border: 1px solid rgba(250, 230, 201, 0.08);
-  border-radius: 28px;
-  padding: 2rem;
-  min-height: 100%;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.16);
-}
-
-.feature-card.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-card-soft {
-  background: linear-gradient(180deg, rgba(34, 21, 16, 0.92) 0%, rgba(31, 20, 15, 0.98) 100%);
-}
-
-.feature-eyebrow,
-.catalog-kicker {
-  color: #ffd27d;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.82rem;
-  margin-bottom: 0.75rem;
-  font-weight: 700;
-}
-
-.feature-card h3 {
-  color: #fff7ed;
-  font-size: 1.9rem;
-  margin-bottom: 0.85rem;
-}
-
-.feature-card p,
-.feature-footnote {
-  color: #dcccbc;
-  line-height: 1.7;
-}
-
-.collection-pills {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.collection-pill,
-.summary-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1rem;
-  border-radius: 999px;
-  font-weight: 600;
-}
-
-.collection-pill {
-  background: rgba(102, 187, 106, 0.14);
-  color: #ddf8df;
-  border: 1px solid rgba(102, 187, 106, 0.18);
-}
-
-.product-animate {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.2s;
 }
 
 @keyframes fadeInUp {
@@ -601,14 +276,6 @@ export default {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Hero Content Animation */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.3s;
 }
 
 .catalog-surface {
@@ -627,6 +294,15 @@ export default {
   margin-bottom: 2rem;
 }
 
+.catalog-kicker {
+  color: #ffd27d;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
 .catalog-topbar .title {
   color: #fff7ed;
   margin-bottom: 0.45rem;
@@ -636,23 +312,22 @@ export default {
   color: #ccb8a5 !important;
 }
 
-.catalog-summary {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
 .summary-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
   background: rgba(102, 187, 106, 0.14);
   color: #dff7e0;
   border: 1px solid rgba(102, 187, 106, 0.18);
+  font-weight: 600;
 }
 
-.summary-pill.is-muted {
-  background: rgba(255, 183, 77, 0.12);
-  color: #ffe2a8;
-  border-color: rgba(255, 183, 77, 0.14);
+.product-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
 }
 
 .show-more-btn {
@@ -683,12 +358,6 @@ export default {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.cta-card:hover {
-  transform: translateY(-5px);
 }
 
 @media (max-width: 768px) {
@@ -711,11 +380,6 @@ export default {
     max-width: 300px;
   }
 
-  .hero-pills,
-  .catalog-summary {
-    justify-content: center;
-  }
-
   .catalog-topbar {
     flex-direction: column;
   }
@@ -724,179 +388,5 @@ export default {
     padding: 1.4rem;
     border-radius: 24px;
   }
-
-  .stat-card {
-    margin-bottom: 1rem;
-  }
-
-  .section.py-5 {
-    padding-top: 0rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-  /* Location section responsive */
-  .columns.is-vcentered {
-    flex-direction: column-reverse;
-  }
-
-  .column.is-6 {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .location-content {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    text-align: center;
-  }
-
-  .map-container {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .location-map {
-    max-height: 300px;
-    object-fit: contain;
-  }
-
-  .tags {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .location-tag {
-    margin: 0.25rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 2rem !important;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-  }
-
-  .stat-icon {
-    font-size: 2.5rem;
-  }
-
-  .location-content {
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .location-content .title.is-3 {
-    font-size: 1.25rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .location-content .subtitle.is-5 {
-    font-size: 1rem !important;
-  }
-
-  .full-description {
-    display: none !important;
-  }
-
-  .short-description {
-    display: block !important;
-  }
-
-  .map-container {
-    padding: 0.5rem;
-    max-width: 100%;
-    margin-top: 1rem;
-  }
-
-  .location-map {
-    max-height: 250px;
-    border-width: 2px;
-  }
-
-  .section.py-5 {
-    padding-top: 0rem !important;
-    padding-bottom: 1rem !important;
-  }
-}
-
-.button:focus {
-  outline: 2px solid #2e7d32;
-  outline-offset: 2px;
-}
-
-.location-content {
-  padding: 1rem;
-  background: rgba(84, 75, 75, 0.6);
-  border-radius: 18px;
-  box-shadow: 0 4px 18px rgba(72, 187, 120, 0.12);
-}
-
-.full-description {
-  display: block;
-}
-
-.short-description {
-  display: none;
-}
-
-.has-text-green {
-  color: #66bb6a !important;
-}
-
-.has-text-muted {
-  color: #b5b5b5 !important;
-}
-
-.map-container {
-  position: relative;
-  padding: 1rem;
-  background: rgba(84, 75, 75, 0.6);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(72, 187, 120, 0.15);
-  transition: transform 0.3s ease;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.map-container:hover {
-  transform: translateY(-5px);
-}
-
-.location-map {
-  width: 100%;
-  height: auto;
-  max-height: 350px;
-  object-fit: contain;
-  border-radius: 12px;
-  border: 3px solid #66bb6a;
-  filter: brightness(0.9) contrast(1.1);
-}
-
-.location-tag {
-  background: #2e7d32 !important;
-  color: white !important;
-  border: none;
-  margin-right: 0.75rem;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.15);
-  transition: transform 0.2s ease;
-}
-
-.location-tag:hover {
-  transform: translateY(-2px);
-  background: #388e3c !important;
-}
-
-.location-tag .icon {
-  margin-right: 0.5rem;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 </style>

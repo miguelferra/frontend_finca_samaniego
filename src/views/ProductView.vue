@@ -1,172 +1,129 @@
 <template>
-  <div v-if="product" class="product-page">
-    <section class="product-shell">
-      <header class="product-header">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
+  <div class="product-page">
+    <section v-if="product" class="product-shell fade-in">
+      <div class="product-header">
+        <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
           <ul>
             <li>
               <router-link to="/" class="breadcrumb-link">Inicio</router-link>
             </li>
             <li>
-              <router-link to="/productos" class="breadcrumb-link">
-                Productos
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                :to="`/${product.category_slug}`"
-                class="breadcrumb-link"
-              >
-                {{ product.category_name }}
-              </router-link>
+              <router-link to="/productos" class="breadcrumb-link">Productos</router-link>
             </li>
             <li class="is-active">
-              <span aria-current="page" class="breadcrumb-link">
-                {{ product.name }}
-              </span>
+              <a href="#" aria-current="page" class="breadcrumb-link">{{ product.name }}</a>
             </li>
           </ul>
         </nav>
-      </header>
+      </div>
 
-      <div class="product-body columns is-variable is-6">
-        <div class="column is-5">
-          <div class="product-image-card">
-            <span class="product-chip">{{ product.category_name }}</span>
-            <img
-              v-if="product.image_url"
-              :src="product.image_url"
-              :alt="product.name"
-              @error="handleImageError"
-            />
+      <div class="product-body">
+        <div class="columns is-variable is-6">
+          <div class="column is-6">
+            <div class="product-image-card">
+              <span class="product-chip">{{ product.category_name }}</span>
+              <img
+                :src="product.image_url"
+                :alt="product.name"
+                @error="handleImageError"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="column is-7">
-          <div class="product-summary">
-            <div class="availability-row">
-              <span
-                class="availability-badge"
-                :class="{ 'is-soon': !product.isAvailable }"
-              >
-                <i
-                  :class="
+          <div class="column is-6">
+            <div class="product-summary">
+              <div class="availability-row">
+                <span
+                  class="availability-badge"
+                  :class="{ 'is-soon': !product.isAvailable }"
+                >
+                  <i
+                    :class="
+                      product.isAvailable
+                        ? 'fas fa-check-circle'
+                        : 'fas fa-hourglass-half'
+                    "
+                  ></i>
+                  {{
                     product.isAvailable
-                      ? 'fas fa-check-circle'
-                      : 'fas fa-hourglass-half'
-                  "
-                ></i>
-                {{
-                  product.isAvailable
-                    ? "Disponible para pedido"
-                    : "Próximamente"
-                }}
-              </span>
-              <button @click="toggleWishlist" class="wishlist-btn" type="button">
-                <i :class="isInWishlist ? 'fas fa-heart' : 'far fa-heart'"></i>
-                {{ isInWishlist ? "Guardado" : "Guardar" }}
-              </button>
-            </div>
+                      ? 'Disponible para pedido'
+                      : 'Próximamente'
+                  }}
+                </span>
+              </div>
 
-            <h1 class="product-title">{{ product.name }}</h1>
-            <p class="product-description">{{ product.description }}</p>
+              <h1 class="product-title">{{ product.name }}</h1>
+              <p class="product-description">{{ product.description }}</p>
 
-            <div class="highlight-grid">
-              <div class="highlight-card">
-                <span class="highlight-label">Precio</span>
-                <strong>{{ product.formattedPrice }}</strong>
+              <div class="highlight-grid">
+                <div class="highlight-card">
+                  <span class="highlight-label">Precio</span>
+                  <strong>{{ product.formattedPrice }}</strong>
+                </div>
+                <div class="highlight-card">
+                  <span class="highlight-label">Origen</span>
+                  <strong>Bacerac, Sonora</strong>
+                </div>
               </div>
-              <div class="highlight-card">
-                <span class="highlight-label">Origen</span>
-                <strong>Bacerac, Sonora</strong>
-              </div>
-              <div class="highlight-card">
-                <span class="highlight-label">Proceso</span>
-                <strong>Artesanal</strong>
-              </div>
-            </div>
 
-            <div class="benefits-section">
-              <h2>¿Por qué elegir este producto?</h2>
-              <div class="benefit-item">
-                <i class="fas fa-leaf benefit-icon"></i>
-                <span>100% natural, sin conservadores artificiales</span>
-              </div>
-              <div class="benefit-item">
-                <i class="fas fa-hands benefit-icon"></i>
-                <span>Cosechado a mano en la Sierra de Bacerac</span>
-              </div>
-              <div class="benefit-item">
-                <i class="fas fa-fire benefit-icon"></i>
-                <span>{{ product.spicyLevel || "Perfil auténtico sonorense" }}</span>
-              </div>
-              <div class="benefit-item">
-                <i class="fas fa-heart benefit-icon"></i>
-                <span>Ideal para cocina diaria, regalo o mesa de reunión</span>
-              </div>
-            </div>
+              <div class="action-section">
+                <div class="quantity-selector" v-if="product.isAvailable">
+                  <label for="quantity-input">Cantidad</label>
+                  <div class="quantity-controls">
+                    <button @click="decreaseQuantity" class="qty-btn" type="button">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input
+                      id="quantity-input"
+                      v-model.number="quantity"
+                      type="number"
+                      min="1"
+                      max="99"
+                      class="quantity-input"
+                      @blur="sanitizeQuantity"
+                    />
+                    <button @click="increaseQuantity" class="qty-btn" type="button">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
 
-            <div class="action-section">
-              <div class="quantity-selector" v-if="product.isAvailable">
-                <label for="quantity-input">Cantidad</label>
-                <div class="quantity-controls">
-                  <button @click="decreaseQuantity" class="qty-btn" type="button">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <input
-                    id="quantity-input"
-                    v-model.number="quantity"
-                    type="number"
-                    min="1"
-                    max="99"
-                    class="quantity-input"
-                    @blur="sanitizeQuantity"
-                  />
-                  <button @click="increaseQuantity" class="qty-btn" type="button">
-                    <i class="fas fa-plus"></i>
+                <div class="buttons-container">
+                  <a
+                    v-if="product.isAvailable"
+                    :href="getWhatsAppLink()"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="whatsapp-btn"
+                  >
+                    <i class="fab fa-whatsapp"></i>
+                    Ordenar por WhatsApp
+                  </a>
+
+                  <button
+                    v-else
+                    type="button"
+                    class="notify-btn"
+                    @click="openNotifyLink"
+                  >
+                    <i class="fas fa-bell"></i>
+                    Consultar disponibilidad
                   </button>
                 </div>
               </div>
 
-              <div class="buttons-container">
-                <a
-                  v-if="product.isAvailable"
-                  :href="getWhatsAppLink()"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  class="whatsapp-btn"
-                >
-                  <i class="fab fa-whatsapp"></i>
-                  Pedir por WhatsApp
-                </a>
-
-                <button
-                  v-else
-                  type="button"
-                  class="notify-btn"
-                  @click="openNotifyLink"
-                >
-                  <i class="fas fa-bell"></i>
-                  Consultar lanzamiento
-                </button>
-              </div>
-            </div>
-
-            <div class="share-section">
-              <p>Compartir este producto</p>
-              <div class="share-buttons">
-                <button @click="shareOnFacebook" class="share-btn" type="button">
-                  <i class="fab fa-facebook"></i>
-                  Facebook
-                </button>
-                <button @click="shareOnWhatsApp" class="share-btn" type="button">
-                  <i class="fab fa-whatsapp"></i>
-                  WhatsApp
-                </button>
-                <button @click="copyLink" class="share-btn" type="button">
-                  <i class="fas fa-link"></i>
-                  {{ linkCopied ? "Enlace copiado" : "Copiar enlace" }}
-                </button>
+              <div class="share-section">
+                <p>Compartir:</p>
+                <div class="share-buttons">
+                  <button @click="shareOnWhatsApp" class="share-btn" type="button">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                  </button>
+                  <button @click="copyLink" class="share-btn" type="button">
+                    <i class="fas fa-link"></i>
+                    {{ linkCopied ? 'Enlace copiado' : 'Copiar enlace' }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -212,15 +169,15 @@
         </div>
       </section>
     </section>
-  </div>
 
-  <div v-else class="not-found">
-    <i class="fas fa-exclamation-circle"></i>
-    <h1>Producto no encontrado</h1>
-    <p>El enlace no corresponde a un producto visible del catálogo actual.</p>
-    <router-link to="/productos" class="button not-found-btn">
-      Volver al catálogo
-    </router-link>
+    <div v-else class="not-found">
+      <i class="fas fa-exclamation-circle"></i>
+      <h1>Producto no encontrado</h1>
+      <p>El producto solicitado no está disponible en nuestro catálogo.</p>
+      <router-link to="/productos" class="button not-found-btn">
+        Ver catálogo completo
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -230,15 +187,12 @@ import {
   getRelatedProducts,
 } from "@/utils/products.js";
 
-const WISHLIST_KEY = "wishlist";
-
 export default {
   name: "ProductView",
   data() {
     return {
       product: null,
       quantity: 1,
-      isInWishlist: false,
       linkCopied: false,
       relatedProducts: [],
     };
@@ -261,7 +215,6 @@ export default {
       this.relatedProducts = this.product
         ? getRelatedProducts(this.product)
         : [];
-      this.syncWishlistState();
 
       document.title = this.product
         ? `${this.product.name} | Finca Samaniego`
@@ -269,7 +222,6 @@ export default {
     },
 
     handleImageError(event) {
-      console.warn("No se pudo cargar la imagen:", event.target.src);
       event.target.src =
         "https://via.placeholder.com/500x400/cccccc/666666?text=Imagen+no+disponible";
     },
@@ -295,59 +247,14 @@ export default {
 
     getWhatsAppLink() {
       const phoneNumber = "523313832186";
-      const message = `Hola, me interesa pedir ${this.quantity} unidad(es) de ${this.product.name}. ¿Me compartes disponibilidad y forma de entrega?`;
+      const message = `Hola, me interesa pedir ${this.quantity} unidad(es) de ${this.product.name}. ¿Me compartes disponibilidad?`;
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     },
 
     getNotifyLink() {
       const phoneNumber = "523313832186";
-      const message = `Hola, me interesa ${this.product.name}. ¿Podrían avisarme cuando esté disponible?`;
+      const message = `Hola, me interesa ${this.product.name}. ¿Cuándo estará disponible?`;
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    },
-
-    readWishlist() {
-      try {
-        const wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
-        return Array.isArray(wishlist) ? wishlist : [];
-      } catch (error) {
-        return [];
-      }
-    },
-
-    syncWishlistState() {
-      if (!this.product) {
-        this.isInWishlist = false;
-        return;
-      }
-
-      this.isInWishlist = this.readWishlist().includes(this.product.id);
-    },
-
-    toggleWishlist() {
-      if (!this.product) {
-        return;
-      }
-
-      const wishlist = this.readWishlist();
-      const nextWishlist = this.isInWishlist
-        ? wishlist.filter((id) => id !== this.product.id)
-        : [...new Set([...wishlist, this.product.id])];
-
-      localStorage.setItem(WISHLIST_KEY, JSON.stringify(nextWishlist));
-      this.isInWishlist = nextWishlist.includes(this.product.id);
-
-      if (this.isInWishlist) {
-        this.$toast.success("Producto guardado en favoritos");
-      } else {
-        this.$toast.info("Producto eliminado de favoritos");
-      }
-    },
-
-    shareOnFacebook() {
-      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        window.location.href
-      )}`;
-      window.open(shareUrl, "_blank", "noopener,noreferrer");
     },
 
     shareOnWhatsApp() {
@@ -364,12 +271,11 @@ export default {
       try {
         await navigator.clipboard.writeText(window.location.href);
         this.linkCopied = true;
-        this.$toast.success("Enlace copiado");
         window.setTimeout(() => {
           this.linkCopied = false;
         }, 1800);
       } catch (error) {
-        this.$toast.warning("No se pudo copiar el enlace");
+        console.error("Error al copiar enlace");
       }
     },
   },
@@ -394,11 +300,6 @@ export default {
   padding: 1.4rem 1.8rem 0;
 }
 
-.breadcrumb {
-  background: transparent;
-  padding: 0;
-}
-
 .breadcrumb-link {
   color: #d8c4b0 !important;
 }
@@ -417,7 +318,6 @@ export default {
   border-radius: 28px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.2);
 }
 
 .product-image-card img {
@@ -453,46 +353,25 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
-.availability-badge,
-.wishlist-btn {
+.availability-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 42px;
-  border-radius: 999px;
   padding: 0.65rem 1rem;
-  font-weight: 700;
-}
-
-.availability-badge {
+  border-radius: 999px;
   background: rgba(102, 187, 106, 0.14);
   color: #dff7e0;
   border: 1px solid rgba(102, 187, 106, 0.18);
+  font-weight: 700;
 }
 
 .availability-badge.is-soon {
   background: rgba(255, 183, 77, 0.12);
   color: #ffe2a8;
   border-color: rgba(255, 183, 77, 0.16);
-}
-
-.wishlist-btn {
-  background: transparent;
-  color: #f5d7d7;
-  border: 1px solid rgba(255, 142, 142, 0.2);
-}
-
-.wishlist-btn .fas {
-  color: #ff7d7d;
-}
-
-.wishlist-btn:hover {
-  background: rgba(255, 125, 125, 0.08);
 }
 
 .product-title {
@@ -512,9 +391,9 @@ export default {
 
 .highlight-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
-  margin-bottom: 1.7rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .highlight-card {
@@ -527,7 +406,7 @@ export default {
 .highlight-card strong {
   color: #fff7ed;
   display: block;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
 }
 
 .highlight-label {
@@ -539,50 +418,20 @@ export default {
   margin-bottom: 0.4rem;
 }
 
-.benefits-section {
-  background: rgba(102, 187, 106, 0.08);
-  border-radius: 24px;
-  padding: 1.4rem;
-  margin-bottom: 1.6rem;
-}
-
-.benefits-section h2 {
-  color: #fff7ed;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.benefit-item {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  color: #f0e6dc;
-  margin-bottom: 0.95rem;
-}
-
-.benefit-item:last-child {
-  margin-bottom: 0;
-}
-
-.benefit-icon {
-  color: #66bb6a;
-  font-size: 1.2rem;
-}
-
 .action-section {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .quantity-selector label {
   display: block;
   color: #d7c4b0;
   font-weight: 700;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .quantity-controls {
@@ -603,10 +452,6 @@ export default {
   border-radius: 50%;
 }
 
-.qty-btn:hover {
-  background: #4fa953;
-}
-
 .quantity-input {
   background: transparent;
   border: none;
@@ -616,79 +461,62 @@ export default {
   font-weight: 700;
 }
 
-.quantity-input::-webkit-inner-spin-button,
-.quantity-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .buttons-container {
   display: flex;
   gap: 0.8rem;
-  flex-wrap: wrap;
+  flex: 1;
 }
 
 .whatsapp-btn,
 .notify-btn,
-.share-btn,
-.not-found-btn {
+.share-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  min-height: 48px;
+  gap: 0.6rem;
+  min-height: 50px;
   border-radius: 999px;
-  padding: 0.8rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   font-weight: 700;
   border: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .whatsapp-btn {
   background: #25d366;
   color: #fff;
-}
-
-.whatsapp-btn:hover {
-  background: #20b858;
-  color: #fff;
+  flex: 1;
 }
 
 .notify-btn {
   background: transparent;
   color: #ffe2a8;
   border: 1px solid rgba(255, 183, 77, 0.22);
-}
-
-.notify-btn:hover {
-  background: rgba(255, 183, 77, 0.12);
+  flex: 1;
 }
 
 .share-section {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.4rem;
+  padding-top: 1.5rem;
 }
 
 .share-section p {
   color: #d7c4b0;
   font-weight: 700;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .share-buttons {
   display: flex;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .share-btn {
   background: rgba(255, 255, 255, 0.04);
   color: #f1e7de;
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.share-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  flex: 1;
 }
 
 .related-products {
@@ -696,7 +524,7 @@ export default {
 }
 
 .related-header {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .related-kicker {
@@ -705,7 +533,7 @@ export default {
   letter-spacing: 0.08em;
   font-size: 0.82rem;
   font-weight: 700;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .related-header h3 {
@@ -715,18 +543,17 @@ export default {
 
 .related-product-card {
   display: block;
-  height: 100%;
   background: rgba(18, 11, 8, 0.56);
   border-radius: 22px;
   padding: 1rem;
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease;
+  height: 100%;
 }
 
 .related-product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  transform: translateY(-5px);
 }
 
 .related-product-card img {
@@ -734,7 +561,7 @@ export default {
   height: 180px;
   object-fit: cover;
   border-radius: 16px;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
 }
 
 .related-category {
@@ -744,31 +571,17 @@ export default {
   background: rgba(102, 187, 106, 0.12);
   color: #dff7e0;
   font-size: 0.78rem;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.8rem;
 }
 
 .related-product-card h4 {
   color: #fff6ea;
-  margin-bottom: 0.4rem;
-  white-space: pre-line;
+  margin-bottom: 0.5rem;
 }
 
 .related-price {
   color: #9df8a4;
   font-weight: 700;
-}
-
-.related-product-card.disabled {
-  opacity: 0.88;
-}
-
-.related-product-card.disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.price-soon {
-  color: #ffe2a8;
 }
 
 .not-found {
@@ -794,28 +607,19 @@ export default {
 
 .not-found p {
   color: #d6c7bb;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .not-found-btn {
   background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
   color: #fff;
-}
-
-.not-found-btn:hover {
-  color: #fff;
+  border-radius: 999px;
+  padding: 0.8rem 2rem;
+  border: none;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
-  .product-body,
-  .related-products {
-    padding-inline: 1rem;
-  }
-
-  .product-summary {
-    padding: 1.3rem;
-  }
-
   .product-image-card img {
     min-height: 300px;
   }
@@ -824,20 +628,12 @@ export default {
     grid-template-columns: 1fr;
   }
 
-  .action-section,
-  .availability-row {
+  .action-section {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .buttons-container,
-  .share-buttons {
-    width: 100%;
-  }
-
-  .whatsapp-btn,
-  .notify-btn,
-  .share-btn {
+  .buttons-container {
     width: 100%;
   }
 }

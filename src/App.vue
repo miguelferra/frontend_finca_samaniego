@@ -9,7 +9,7 @@
               class="navbar-item brand-mark"
               @click="closeMobileMenu"
             >
-              <img src="@/assets/logo.png" alt="Finca Samaniego Logo" />
+              <img src="@/assets/finca_sama.png" alt="Finca Samaniego Logo" />
               <strong class="ml-2 brand-name">Finca Samaniego</strong>
             </router-link>
             <button
