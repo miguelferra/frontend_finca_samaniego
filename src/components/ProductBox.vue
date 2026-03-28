@@ -23,7 +23,16 @@
         />
       </figure>
       <div class="product-copy">
-        <h3 class="is-size-4 product-title">{{ product.name }}</h3>
+        <h3 class="is-size-4 product-title">
+          <template v-if="product.name.includes('\n')">
+            <span class="has-text-green">{{ product.name.split('\n')[0] }}</span>
+            <br />
+            <span class="is-size-5 commercial-name">{{ product.name.split('\n')[1] }}</span>
+          </template>
+          <template v-else>
+            {{ product.name }}
+          </template>
+        </h3>
         <p class="product-description">{{ product.description }}</p>
         <p v-if="product.isAvailable" class="is-size-6 has-text-grey product-price">
           {{ product.formattedPrice }}
@@ -222,6 +231,12 @@ export default {
 .product-title {
   white-space: pre-line;
   min-height: 3.1em;
+}
+
+.commercial-name {
+  color: #fff8ef;
+  opacity: 0.9;
+  font-weight: 600;
 }
 
 .product-card.is-coming-soon {

@@ -52,7 +52,16 @@
                 </span>
               </div>
 
-              <h1 class="product-title">{{ product.name }}</h1>
+              <h1 class="product-title">
+                <template v-if="product.name.includes('\n')">
+                  <span class="has-text-green">{{ product.name.split('\n')[0] }}</span>
+                  <br />
+                  <span class="commercial-title">{{ product.name.split('\n')[1] }}</span>
+                </template>
+                <template v-else>
+                  {{ product.name }}
+                </template>
+              </h1>
               <p class="product-description">{{ product.description }}</p>
 
               <div class="highlight-grid">
@@ -66,7 +75,7 @@
                 </div>
               </div>
 
-              <!-- Beneficios Section - RESTORED & REFINED -->
+              <!-- Beneficios Section -->
               <div class="benefits-strip mb-5">
                 <div class="benefit-tag">
                   <i class="fas fa-leaf"></i>
@@ -145,34 +154,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Process/Ingredients Section - RESTORED & REFINED -->
-      <section class="details-section section">
-        <div class="columns is-variable is-8">
-          <div class="column is-6">
-            <div class="detail-box r-box">
-              <h3 class="title is-4 has-text-white mb-3">
-                <i class="fas fa-vial mr-2 has-text-green"></i>
-                Ingredientes
-              </h3>
-              <p class="has-text-muted">
-                Solo lo esencial: Chiltepín puro de la sierra sonorense, agua de manantial, sal de mar y el toque justo de especias regionales. Sin conservadores artificiales ni colorantes.
-              </p>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="detail-box">
-              <h3 class="title is-4 has-text-white mb-3">
-                <i class="fas fa-sync-alt mr-2 has-text-green"></i>
-                Proceso artesanal
-              </h3>
-              <p class="has-text-muted">
-                Cada lote se prepara a mano, respetando los tiempos de maduración y las recetas que han pasado de generación en generación en Bacerac.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section class="related-products" v-if="relatedProducts.length > 0">
         <div class="related-header">
@@ -454,6 +435,13 @@ export default {
   white-space: pre-line;
 }
 
+.commercial-title {
+  font-size: 0.6em;
+  opacity: 0.85;
+  color: #fff;
+  font-weight: 600;
+}
+
 .product-description {
   color: #d6c7bb;
   font-size: 1.05rem;
@@ -512,30 +500,6 @@ export default {
 
 .benefit-tag i {
   color: #66bb6a;
-}
-
-/* Details Section Styling */
-.details-section {
-  padding: 2rem 1.8rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  margin: 1rem 0;
-}
-
-.detail-box {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 1.5rem;
-  border-radius: 24px;
-  height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.has-text-green {
-  color: #66bb6a !important;
-}
-
-.has-text-muted {
-  color: #ccb8a5 !important;
 }
 
 .action-section {
@@ -756,14 +720,6 @@ export default {
 
   .buttons-container {
     width: 100%;
-  }
-
-  .details-section {
-    padding: 1.5rem 1rem;
-  }
-
-  .detail-box {
-    margin-bottom: 1rem;
   }
 }
 </style>
