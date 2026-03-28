@@ -394,10 +394,11 @@ export default {
 
 .product-image-card img {
   width: 100%;
-  height: 100%;
-  min-height: 480px;
-  object-fit: cover;
+  height: 520px;
+  object-fit: contain;
   display: block;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
 }
 
 .product-chip {
