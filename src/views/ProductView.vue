@@ -260,9 +260,37 @@ export default {
         ? getRelatedProducts(this.product)
         : [];
 
-      document.title = this.product
-        ? `${this.product.name} | Finca Samaniego`
-        : "Producto no encontrado | Finca Samaniego";
+      if (this.product) {
+        document.title = `${this.product.name} | Finca Samaniego`;
+        this.updateMetaTags();
+      } else {
+        document.title = "Producto no encontrado | Finca Samaniego";
+      }
+    },
+
+    updateMetaTags() {
+      if (!this.product) return;
+
+      const title = `${this.product.name} | Finca Samaniego`;
+      const description = this.product.description;
+      const imageUrl = this.product.image_url;
+      const pageUrl = window.location.href;
+
+      const setMeta = (property, content) => {
+        let element = document.querySelector(`meta[property="${property}"]`);
+        if (!element) {
+          element = document.createElement("meta");
+          element.setAttribute("property", property);
+          document.head.appendChild(element);
+        }
+        element.setAttribute("content", content);
+      };
+
+      setMeta("og:title", title);
+      setMeta("og:description", description);
+      setMeta("og:image", imageUrl);
+      setMeta("og:url", pageUrl);
+      setMeta("og:type", "website");
     },
 
     handleImageError(event) {
@@ -302,7 +330,7 @@ export default {
     },
 
     shareOnWhatsApp() {
-      const message = `${this.product.name} - ${window.location.href}`;
+      const message = `🌶️ *${this.product.name}*\n\n_${this.product.description}_\n\n💰 *Precio:* ${this.product.formattedPrice}\n\n🔗 *Ver en el catálogo:* ${window.location.href}`;
       const shareUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
       window.open(shareUrl, "_blank", "noopener,noreferrer");
     },

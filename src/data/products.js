@@ -67,18 +67,47 @@ export const allProducts = [
     "get_absolute_url": "/chiltepin_entero/chiltepin-seco",
     "coming_soon": true
   },
- {
+  {
+    "id": 8,
+    "name": "⭐ El Oro Tostado (Star)\nSalsa Macha 100ml",
+    "slug": "salsa-macha-100ml",
+    "description": "Nuestra presentación estrella. El balance perfecto entre textura rústica y el picor exacto del chiltepín. Ajo dorado y semillas tostadas en el tamaño ideal para regalo o para llevar el sabor de la finca a cualquier mesa.",
+    "price": "90.00",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774735060/macha100ml_b7stpj.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774735060/macha100ml_b7stpj.png",
+    "date_added": "2025-12-28T11:00:00.000Z",
+    "category_slug": "salsa_chiltepin",
+    "category_name": "Salsa Chiltepin",
+    "get_absolute_url": "/salsa_chiltepin/salsa-macha-100ml",
+    "isAvailable": true
+  },
+  {
     "id": 6,
-    "name": "✨ El Oro Tostado\nSalsa Macha de Chiltepín",
-    "slug": "salsa-macha-oro-tostado",
-    "description": "Textura rústica, sabor profundo. Ajo dorado, semillas tostadas y el golpe exacto del chiltepín de la sierra. El toque 'crunch' perfecto.",
+    "name": "✨ La Reserva de Bacerac\nSalsa Macha 150ml",
+    "slug": "salsa-macha-150ml",
+    "description": "La presentación clásica de nuestra salsa macha rústica. Con ajo dorado, semillas tostadas y el golpe exacto del chiltepín de la sierra. El toque 'crunch' que tu cocina necesita.",
     "price": "150.00",
-    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1761888205/salsa1v_w9auvm.png",
-    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1761888205/salsa1v_w9auvm.png",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774734943/macha150ml_orpazv.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774734943/macha150ml_orpazv.png",
     "date_added": "2025-11-26T03:00:00.000Z",
     "category_slug": "salsa_chiltepin",
     "category_name": "Salsa Chiltepin",
-    "get_absolute_url": "/salsa_chiltepin/salsa-macha-oro-tostado"
+    "get_absolute_url": "/salsa_chiltepin/salsa-macha-150ml",
+    "isAvailable": true
+  },
+  {
+    "id": 9,
+    "name": "🔥 El Gigante de la Sierra\nSalsa Macha 250ml",
+    "slug": "salsa-macha-250ml",
+    "description": "Para los amantes del sabor intenso que nunca quieren quedarse sin su dotación. Nuestra receta original en tamaño grande, perfecta para familias o reuniones.",
+    "price": "200.00",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774734939/macha250ml_xbnqoo.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774734939/macha250ml_xbnqoo.png",
+    "date_added": "2025-12-28T12:00:00.000Z",
+    "category_slug": "salsa_chiltepin",
+    "category_name": "Salsa Chiltepin",
+    "get_absolute_url": "/salsa_chiltepin/salsa-macha-250ml",
+    "isAvailable": true
   },
   {
     "id": 7,
@@ -89,9 +118,9 @@ export const allProducts = [
     "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774732816/miel_chitepin_m55p5c.png",
     "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774732816/miel_chitepin_m55p5c.png",
     "date_added": "2025-12-28T10:00:00.000Z",
-    "category_slug": "especialidades",
-    "category_name": "Especialidades",
-    "get_absolute_url": "/especialidades/miel-con-chiltepin",
+    "category_slug": "salsa_chiltepin",
+    "category_name": "Salsa Chiltepin",
+    "get_absolute_url": "/salsa_chiltepin/miel-con-chiltepin",
     "isAvailable": true
   }
 ];
