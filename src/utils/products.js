@@ -36,7 +36,7 @@ const normalizedProducts = productCatalog.map(normalizeProduct);
 export const getAllProducts = () => cloneProducts(normalizedProducts);
 
 export const getLatestProducts = () =>
-  cloneProducts(normalizedProducts).sort(compareByNewest);
+  cloneProducts(normalizedProducts);
 
 export const getCategoryBySlug = (categorySlug) => {
   const products = getLatestProducts().filter(
