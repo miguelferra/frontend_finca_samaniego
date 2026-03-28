@@ -79,5 +79,19 @@ export const allProducts = [
     "category_slug": "salsa_chiltepin",
     "category_name": "Salsa Chiltepin",
     "get_absolute_url": "/salsa_chiltepin/salsa-macha-oro-tostado"
+  },
+  {
+    "id": 7,
+    "name": "🍯 Dulce Enigma\nMiel con Chiltepín",
+    "slug": "miel-con-chiltepin",
+    "description": "El encuentro perfecto entre la dulzura silvestre y el picor legendario. Nuestra miel de abeja premium infusionada con chiltepín de la sierra. El acompañante ideal para quesos, carnes blancas y repostería audaz.",
+    "price": "165.00",
+    "image_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774732816/miel_chitepin_m55p5c.png",
+    "thumbnail_url": "https://res.cloudinary.com/dtfgigvrb/image/upload/v1774732816/miel_chitepin_m55p5c.png",
+    "date_added": "2025-12-28T10:00:00.000Z",
+    "category_slug": "especialidades",
+    "category_name": "Especialidades",
+    "get_absolute_url": "/especialidades/miel-con-chiltepin",
+    "isAvailable": true
   }
 ];
