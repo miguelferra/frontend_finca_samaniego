@@ -1,32 +1,38 @@
 <template>
-  <div class="product-container" v-if="product">
-    <!-- Header con breadcrumb -->
-    <div class="product-header">
-      <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-          <li>
-            <router-link to="/" class="breadcrumb-link">Inicio</router-link>
-          </li>
-          <li>
-            <router-link to="/productos" class="breadcrumb-link"
-              >Productos</router-link
-            >
-          </li>
-          <li class="is-active">
-            <a href="#" aria-current="page" class="breadcrumb-link">{{
-              product.name
-            }}</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <div v-if="product" class="product-page">
+    <section class="product-shell">
+      <header class="product-header">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+          <ul>
+            <li>
+              <router-link to="/" class="breadcrumb-link">Inicio</router-link>
+            </li>
+            <li>
+              <router-link to="/productos" class="breadcrumb-link">
+                Productos
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                :to="`/${product.category_slug}`"
+                class="breadcrumb-link"
+              >
+                {{ product.category_name }}
+              </router-link>
+            </li>
+            <li class="is-active">
+              <span aria-current="page" class="breadcrumb-link">
+                {{ product.name }}
+              </span>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-    <!-- Cuerpo del producto -->
-    <div class="product-body">
-      <div class="columns">
-        <!-- Imagen del producto -->
+      <div class="product-body columns is-variable is-6">
         <div class="column is-5">
-          <div class="product-image">
+          <div class="product-image-card">
+            <span class="product-chip">{{ product.category_name }}</span>
             <img
               v-if="product.image_url"
               :src="product.image_url"
@@ -36,149 +42,195 @@
           </div>
         </div>
 
-        <!-- Información del producto -->
         <div class="column is-7">
-          <h1 class="product-title">{{ product.name }}</h1>
-          <p class="product-subtitle">
-            {{
-              product.description ||
-              "Producto artesanal de la Sierra de Bacerac"
-            }}
-          </p>
+          <div class="product-summary">
+            <div class="availability-row">
+              <span
+                class="availability-badge"
+                :class="{ 'is-soon': !product.isAvailable }"
+              >
+                <i
+                  :class="
+                    product.isAvailable
+                      ? 'fas fa-check-circle'
+                      : 'fas fa-hourglass-half'
+                  "
+                ></i>
+                {{
+                  product.isAvailable
+                    ? "Disponible para pedido"
+                    : "Próximamente"
+                }}
+              </span>
+              <button @click="toggleWishlist" class="wishlist-btn" type="button">
+                <i :class="isInWishlist ? 'fas fa-heart' : 'far fa-heart'"></i>
+                {{ isInWishlist ? "Guardado" : "Guardar" }}
+              </button>
+            </div>
 
-          <!-- Precio -->
-          <div class="price-tag">${{ product.price }} MXN</div>
+            <h1 class="product-title">{{ product.name }}</h1>
+            <p class="product-description">{{ product.description }}</p>
 
-          <!-- Disponibilidad -->
-          <div class="availability-badge" v-if="product.available !== false">
-            <i class="fas fa-check-circle"></i>
-            <span>Disponible - Entrega inmediata</span>
-          </div>
-          <div class="unavailable-badge" v-else>
-            <i class="fas fa-times-circle"></i>
-            <span>Temporalmente no disponible</span>
-          </div>
-          <!-- Beneficios -->
-          <div class="benefits-section">
-            <h3>¿Por qué elegir nuestro {{ product.name }}?</h3>
-            <div class="benefit-item">
-              <i class="fas fa-leaf benefit-icon"></i>
-              <span>100% Natural - Sin conservadores artificiales</span>
+            <div class="highlight-grid">
+              <div class="highlight-card">
+                <span class="highlight-label">Precio</span>
+                <strong>{{ product.formattedPrice }}</strong>
+              </div>
+              <div class="highlight-card">
+                <span class="highlight-label">Origen</span>
+                <strong>Bacerac, Sonora</strong>
+              </div>
+              <div class="highlight-card">
+                <span class="highlight-label">Proceso</span>
+                <strong>Artesanal</strong>
+              </div>
             </div>
-            <div class="benefit-item">
-              <i class="fas fa-hands benefit-icon"></i>
-              <span>Cosechado a mano en la Sierra de Bacerac</span>
-            </div>
-            <div class="benefit-item">
-              <i class="fas fa-fire benefit-icon"></i>
-              <span>{{
-                product.spicyLevel || "Sabor auténtico sonorense"
-              }}</span>
-            </div>
-            <div class="benefit-item">
-              <i class="fas fa-heart benefit-icon"></i>
-              <span>Rico en vitamina C y antioxidantes</span>
-            </div>
-          </div>
 
-          <!-- Selector de cantidad y botón de WhatsApp -->
-          <div class="action-section">
-            <div class="quantity-selector">
-              <label>Cantidad:</label>
-              <div class="quantity-controls">
-                <button @click="decreaseQuantity" class="qty-btn">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <input
-                  type="number"
-                  v-model="quantity"
-                  min="1"
-                  max="99"
-                  class="quantity-input"
-                />
-                <button @click="increaseQuantity" class="qty-btn">
-                  <i class="fas fa-plus"></i>
+            <div class="benefits-section">
+              <h2>¿Por qué elegir este producto?</h2>
+              <div class="benefit-item">
+                <i class="fas fa-leaf benefit-icon"></i>
+                <span>100% natural, sin conservadores artificiales</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-hands benefit-icon"></i>
+                <span>Cosechado a mano en la Sierra de Bacerac</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-fire benefit-icon"></i>
+                <span>{{ product.spicyLevel || "Perfil auténtico sonorense" }}</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-heart benefit-icon"></i>
+                <span>Ideal para cocina diaria, regalo o mesa de reunión</span>
+              </div>
+            </div>
+
+            <div class="action-section">
+              <div class="quantity-selector" v-if="product.isAvailable">
+                <label for="quantity-input">Cantidad</label>
+                <div class="quantity-controls">
+                  <button @click="decreaseQuantity" class="qty-btn" type="button">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <input
+                    id="quantity-input"
+                    v-model.number="quantity"
+                    type="number"
+                    min="1"
+                    max="99"
+                    class="quantity-input"
+                    @blur="sanitizeQuantity"
+                  />
+                  <button @click="increaseQuantity" class="qty-btn" type="button">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="buttons-container">
+                <a
+                  v-if="product.isAvailable"
+                  :href="getWhatsAppLink()"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  class="whatsapp-btn"
+                >
+                  <i class="fab fa-whatsapp"></i>
+                  Pedir por WhatsApp
+                </a>
+
+                <button
+                  v-else
+                  type="button"
+                  class="notify-btn"
+                  @click="openNotifyLink"
+                >
+                  <i class="fas fa-bell"></i>
+                  Consultar lanzamiento
                 </button>
               </div>
             </div>
 
-            <div class="buttons-container">
-              <a :href="getWhatsAppLink()" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-                Ordenar por WhatsApp
-              </a>
-
-              <button @click="addToWishlist" class="wishlist-btn">
-                <i :class="isInWishlist ? 'fas fa-heart' : 'far fa-heart'"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Sección para compartir -->
-          <div class="share-section">
-            <p>Compartir este producto:</p>
-            <div class="share-buttons">
-              <button @click="shareOnFacebook" class="share-btn">
-                <i class="fab fa-facebook"></i> Facebook
-              </button>
-              <button @click="shareOnInstagram" class="share-btn">
-                <i class="fab fa-instagram"></i> Instagram
-              </button>
-              <button @click="copyLink" class="share-btn">
-                <i class="fas fa-link"></i>
-                {{ linkCopied ? "¡Copiado!" : "Copiar enlace" }}
-              </button>
+            <div class="share-section">
+              <p>Compartir este producto</p>
+              <div class="share-buttons">
+                <button @click="shareOnFacebook" class="share-btn" type="button">
+                  <i class="fab fa-facebook"></i>
+                  Facebook
+                </button>
+                <button @click="shareOnWhatsApp" class="share-btn" type="button">
+                  <i class="fab fa-whatsapp"></i>
+                  WhatsApp
+                </button>
+                <button @click="copyLink" class="share-btn" type="button">
+                  <i class="fas fa-link"></i>
+                  {{ linkCopied ? "Enlace copiado" : "Copiar enlace" }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Sección adicional de productos relacionados -->
-      <div class="related-products" v-if="relatedProducts.length > 0">
-        <h3>También te puede interesar</h3>
+      <section class="related-products" v-if="relatedProducts.length > 0">
+        <div class="related-header">
+          <p class="related-kicker">Recomendados</p>
+          <h3>También te puede interesar</h3>
+        </div>
         <div class="columns is-multiline">
           <div
             v-for="relatedProduct in relatedProducts"
             :key="relatedProduct.id"
-            class="column is-3"
+            class="column is-3-desktop is-6-tablet"
           >
             <router-link
-              v-if="!relatedProduct.coming_soon"
+              v-if="relatedProduct.isAvailable"
               :to="relatedProduct.get_absolute_url"
               class="related-product-card"
             >
-              <img :src="relatedProduct.image_url" :alt="relatedProduct.name" />
+              <img
+                :src="relatedProduct.image_url"
+                :alt="relatedProduct.name"
+                @error="handleImageError"
+              />
+              <span class="related-category">{{ relatedProduct.category_name }}</span>
               <h4>{{ relatedProduct.name }}</h4>
-              <p class="related-price">${{ relatedProduct.price }}</p>
+              <p class="related-price">{{ relatedProduct.formattedPrice }}</p>
             </router-link>
             <div v-else class="related-product-card disabled">
-              <img :src="relatedProduct.image_url" :alt="relatedProduct.name" />
+              <img
+                :src="relatedProduct.image_url"
+                :alt="relatedProduct.name"
+                @error="handleImageError"
+              />
+              <span class="related-category">{{ relatedProduct.category_name }}</span>
               <h4>{{ relatedProduct.name }}</h4>
-              <p class="related-price price-soon">Disponible Muy Pronto</p>
-              <div class="coming-soon-badge">
-                <i class="fas fa-clock"></i>
-                Próximamente
-              </div>
+              <p class="related-price price-soon">Próximamente</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   </div>
 
-  <!-- Producto no encontrado -->
   <div v-else class="not-found">
     <i class="fas fa-exclamation-circle"></i>
-    <h1 class="title has-text-centered">Producto no encontrado</h1>
-    <p>El producto que buscas no está disponible.</p>
-    <router-link to="/" class="button is-primary">
-      Volver al inicio
+    <h1>Producto no encontrado</h1>
+    <p>El enlace no corresponde a un producto visible del catálogo actual.</p>
+    <router-link to="/productos" class="button not-found-btn">
+      Volver al catálogo
     </router-link>
   </div>
 </template>
 
 <script>
-import { allProducts } from "@/data/products.js";
+import {
+  getProductBySlugs,
+  getRelatedProducts,
+} from "@/utils/products.js";
+
+const WISHLIST_KEY = "wishlist";
 
 export default {
   name: "ProductView",
@@ -191,49 +243,29 @@ export default {
       relatedProducts: [],
     };
   },
-  mounted() {
-    this.getProduct();
-  },
   watch: {
-    $route(to, from) {
-      if (to.name === "Product") {
-        this.getProduct();
-        this.quantity = 1; // Reset quantity when changing products
-      }
+    $route: {
+      immediate: true,
+      handler() {
+        this.loadProduct();
+      },
     },
   },
   methods: {
-    getProduct() {
-      this.$store.commit("setLoading", true);
-      const category_slug = this.$route.params.category_slug;
-      const product_slug = this.$route.params.product_slug;
+    loadProduct() {
+      const { category_slug: categorySlug, product_slug: productSlug } =
+        this.$route.params;
 
-      const foundProduct = allProducts.find(
-        (p) => p.category_slug === category_slug && p.slug === product_slug
-      );
+      this.product = getProductBySlugs(categorySlug, productSlug);
+      this.quantity = 1;
+      this.relatedProducts = this.product
+        ? getRelatedProducts(this.product)
+        : [];
+      this.syncWishlistState();
 
-      if (foundProduct) {
-        this.product = foundProduct;
-        document.title = this.product.name + " | Finca Samaniego";
-        this.loadRelatedProducts();
-        this.checkWishlist();
-      } else {
-        console.error("Producto no encontrado!");
-        this.product = null;
-      }
-
-      this.$store.commit("setLoading", false);
-    },
-
-    loadRelatedProducts() {
-      // Cargar productos relacionados (misma categoría, excluyendo el actual)
-      this.relatedProducts = allProducts
-        .filter(
-          (p) =>
-            p.category_slug === this.product.category_slug &&
-            p.id !== this.product.id
-        )
-        .slice(0, 4); // Mostrar máximo 4 productos
+      document.title = this.product
+        ? `${this.product.name} | Finca Samaniego`
+        : "Producto no encontrado | Finca Samaniego";
     },
 
     handleImageError(event) {
@@ -241,65 +273,103 @@ export default {
       event.target.src =
         "https://via.placeholder.com/500x400/cccccc/666666?text=Imagen+no+disponible";
     },
-    
+
     increaseQuantity() {
       if (this.quantity < 99) {
-        this.quantity++;
+        this.quantity += 1;
       }
     },
 
     decreaseQuantity() {
       if (this.quantity > 1) {
-        this.quantity--;
+        this.quantity -= 1;
       }
+    },
+
+    sanitizeQuantity() {
+      const normalizedQuantity = Number.parseInt(this.quantity, 10);
+      this.quantity = Number.isFinite(normalizedQuantity)
+        ? Math.min(Math.max(normalizedQuantity, 1), 99)
+        : 1;
     },
 
     getWhatsAppLink() {
       const phoneNumber = "523313832186";
-      const message = `Hola! Me interesa ordenar ${this.quantity} unidad(es) de ${this.product.name}. ¿Está disponible?`;
+      const message = `Hola, me interesa pedir ${this.quantity} unidad(es) de ${this.product.name}. ¿Me compartes disponibilidad y forma de entrega?`;
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     },
 
-    addToWishlist() {
-      this.isInWishlist = !this.isInWishlist;
-      // Aquí podrías guardar en localStorage o Vuex
-      if (this.isInWishlist) {
-        this.$toast?.success("Agregado a favoritos") ||
-          console.log("Agregado a favoritos");
-      } else {
-        this.$toast?.info("Removido de favoritos") ||
-          console.log("Removido de favoritos");
+    getNotifyLink() {
+      const phoneNumber = "523313832186";
+      const message = `Hola, me interesa ${this.product.name}. ¿Podrían avisarme cuando esté disponible?`;
+      return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    },
+
+    readWishlist() {
+      try {
+        const wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
+        return Array.isArray(wishlist) ? wishlist : [];
+      } catch (error) {
+        return [];
       }
     },
 
-    checkWishlist() {
-      // Verificar si está en favoritos (localStorage o Vuex)
-      const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-      this.isInWishlist = wishlist.includes(this.product.id);
+    syncWishlistState() {
+      if (!this.product) {
+        this.isInWishlist = false;
+        return;
+      }
+
+      this.isInWishlist = this.readWishlist().includes(this.product.id);
+    },
+
+    toggleWishlist() {
+      if (!this.product) {
+        return;
+      }
+
+      const wishlist = this.readWishlist();
+      const nextWishlist = this.isInWishlist
+        ? wishlist.filter((id) => id !== this.product.id)
+        : [...new Set([...wishlist, this.product.id])];
+
+      localStorage.setItem(WISHLIST_KEY, JSON.stringify(nextWishlist));
+      this.isInWishlist = nextWishlist.includes(this.product.id);
+
+      if (this.isInWishlist) {
+        this.$toast.success("Producto guardado en favoritos");
+      } else {
+        this.$toast.info("Producto eliminado de favoritos");
+      }
     },
 
     shareOnFacebook() {
-      const url = window.location.href;
-      window.open(
-        "https://www.facebook.com/profile.php?id=61576697955087"
-      );
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        window.location.href
+      )}`;
+      window.open(shareUrl, "_blank", "noopener,noreferrer");
     },
 
-    shareOnInstagram() {
-      window.open(
-        "https://www.instagram.com/fincasamaniego"
-      );
+    shareOnWhatsApp() {
+      const message = `${this.product.name} - ${window.location.href}`;
+      const shareUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(shareUrl, "_blank", "noopener,noreferrer");
+    },
+
+    openNotifyLink() {
+      window.open(this.getNotifyLink(), "_blank", "noopener,noreferrer");
     },
 
     async copyLink() {
       try {
         await navigator.clipboard.writeText(window.location.href);
         this.linkCopied = true;
-        setTimeout(() => {
+        this.$toast.success("Enlace copiado");
+        window.setTimeout(() => {
           this.linkCopied = false;
-        }, 2000);
-      } catch (err) {
-        console.error("Error al copiar:", err);
+        }, 1800);
+      } catch (error) {
+        this.$toast.warning("No se pudo copiar el enlace");
       }
     },
   },
@@ -307,19 +377,21 @@ export default {
 </script>
 
 <style scoped>
-.product-container {
-  max-width: 1200px;
+.product-page {
+  max-width: 1240px;
   margin: 0 auto;
-  background: #55342c;
-  border-radius: 20px;
+}
+
+.product-shell {
+  background: linear-gradient(180deg, rgba(38, 24, 19, 0.96) 0%, rgba(27, 17, 14, 0.98) 100%);
+  border-radius: 30px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(240, 218, 188, 0.08);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.22);
 }
 
 .product-header {
-  background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
-  padding: 1.5rem;
-  color: white;
+  padding: 1.4rem 1.8rem 0;
 }
 
 .breadcrumb {
@@ -328,202 +400,220 @@ export default {
 }
 
 .breadcrumb-link {
-  color: white !important;
-  transition: opacity 0.3s;
+  color: #d8c4b0 !important;
 }
 
 .breadcrumb-link:hover {
-  opacity: 0.8;
+  color: #fff !important;
 }
 
 .product-body {
-  padding: 2rem;
+  padding: 1.5rem 1.8rem 2rem;
 }
 
-.product-image {
-  border-radius: 15px;
+.product-image-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.2);
 }
 
-.product-image:hover {
-  transform: scale(1.05);
-}
-
-.product-image img {
+.product-image-card img {
   width: 100%;
-  height: 400px;
+  height: 100%;
+  min-height: 480px;
   object-fit: cover;
+  display: block;
 }
 
-.product-title {
-  color: white;
-  font-size: 2.5rem;
+.product-chip {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(18, 11, 8, 0.68);
+  border: 1px solid rgba(255, 248, 239, 0.12);
+  color: #fff5e8;
+  font-size: 0.82rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
 }
 
-.product-subtitle {
-  color: #66bb6a;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+.product-summary {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 28px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.rating-section {
+.availability-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
-.stars {
-  color: #ffd700;
-}
-
-.rating-text {
-  color: #d0d0d0;
+.availability-badge,
+.wishlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
 }
 
 .availability-badge {
-  background: #66bb6a;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  background: rgba(102, 187, 106, 0.14);
+  color: #dff7e0;
+  border: 1px solid rgba(102, 187, 106, 0.18);
 }
 
-.unavailable-badge {
-  background: #dc3545;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+.availability-badge.is-soon {
+  background: rgba(255, 183, 77, 0.12);
+  color: #ffe2a8;
+  border-color: rgba(255, 183, 77, 0.16);
 }
 
-.price-tag {
-  background: linear-gradient(135deg, #66bb6a 0%, #388e3c 100%);
-  color: white;
-  padding: 1rem 2rem;
-  margin-right: 2rem;
-  border-radius: 50px;
-  display: inline-block;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+.wishlist-btn {
+  background: transparent;
+  color: #f5d7d7;
+  border: 1px solid rgba(255, 142, 142, 0.2);
+}
+
+.wishlist-btn .fas {
+  color: #ff7d7d;
+}
+
+.wishlist-btn:hover {
+  background: rgba(255, 125, 125, 0.08);
+}
+
+.product-title {
+  color: #fff7ed;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .product-description {
-  color: #d0d0d0;
+  color: #d6c7bb;
+  font-size: 1.05rem;
   line-height: 1.8;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1.7rem;
+}
+
+.highlight-card {
+  background: rgba(18, 11, 8, 0.48);
+  border-radius: 20px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.highlight-card strong {
+  color: #fff7ed;
+  display: block;
+  font-size: 1.05rem;
+}
+
+.highlight-label {
+  display: block;
+  color: #9df8a4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .benefits-section {
-  background: rgba(102, 187, 106, 0.1);
-  border-radius: 15px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  background: rgba(102, 187, 106, 0.08);
+  border-radius: 24px;
+  padding: 1.4rem;
+  margin-bottom: 1.6rem;
 }
 
-.benefits-section h3 {
-  color: #66bb6a;
+.benefits-section h2 {
+  color: #fff7ed;
+  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-  color: white;
+  gap: 0.9rem;
+  color: #f0e6dc;
+  margin-bottom: 0.95rem;
+}
+
+.benefit-item:last-child {
+  margin-bottom: 0;
 }
 
 .benefit-icon {
   color: #66bb6a;
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  min-width: 30px;
-}
-
-.ingredients-section {
-  margin-bottom: 2rem;
-}
-
-.ingredients-section h4 {
-  color: #66bb6a;
-  margin-bottom: 1rem;
-}
-
-.ingredients-badge {
-  background: #221510;
-  color: #66bb6a;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin: 0.25rem;
-  border: 2px solid #66bb6a;
+  font-size: 1.2rem;
 }
 
 .action-section {
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.quantity-selector {
-  display: flex;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
   gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
 }
 
 .quantity-selector label {
-  color: #66bb6a;
-  font-weight: 600;
+  display: block;
+  color: #d7c4b0;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
 }
 
 .quantity-controls {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  background: #221510;
-  border-radius: 25px;
-  padding: 0.2rem;
+  background: rgba(18, 11, 8, 0.56);
+  border-radius: 999px;
+  padding: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .qty-btn {
   background: #66bb6a;
-  color: white;
+  color: #fff;
   border: none;
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
 }
 
 .qty-btn:hover {
-  background: #388e3c;
-  transform: scale(1.1);
+  background: #4fa953;
 }
 
 .quantity-input {
   background: transparent;
   border: none;
-  color: white;
-  width: 60px;
+  color: #fff;
+  width: 64px;
   text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .quantity-input::-webkit-inner-spin-button,
@@ -534,141 +624,142 @@ export default {
 
 .buttons-container {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.whatsapp-btn,
+.notify-btn,
+.share-btn,
+.not-found-btn {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 700;
+  border: none;
+  text-decoration: none;
 }
 
 .whatsapp-btn {
   background: #25d366;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-  cursor: pointer;
-  text-decoration: none;
+  color: #fff;
 }
 
 .whatsapp-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
   background: #20b858;
-  color: white;
+  color: #fff;
 }
 
-.wishlist-btn {
-  background: rgba(102, 187, 106, 0.2);
-  color: #66bb6a;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #66bb6a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 1.3rem;
+.notify-btn {
+  background: transparent;
+  color: #ffe2a8;
+  border: 1px solid rgba(255, 183, 77, 0.22);
 }
 
-.wishlist-btn:hover {
-  background: #66bb6a;
-  color: white;
-  transform: scale(1.1);
-}
-
-.wishlist-btn .fas {
-  color: #e74c3c;
+.notify-btn:hover {
+  background: rgba(255, 183, 77, 0.12);
 }
 
 .share-section {
-  border-top: 2px solid rgba(102, 187, 106, 0.2);
-  padding-top: 1.5rem;
-  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.4rem;
 }
 
 .share-section p {
-  color: #66bb6a;
-  margin-bottom: 0.5rem;
+  color: #d7c4b0;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
 }
 
 .share-buttons {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .share-btn {
-  background: rgba(102, 187, 106, 0.2);
-  color: #66bb6a;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #66bb6a;
-  transition: all 0.3s;
-  cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1e7de;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .share-btn:hover {
-  background: #66bb6a;
-  color: white;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .related-products {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 2px solid rgba(102, 187, 106, 0.2);
+  padding: 0 1.8rem 2rem;
 }
 
-.related-products h3 {
-  color: #66bb6a;
+.related-header {
+  margin-bottom: 1.2rem;
+}
+
+.related-kicker {
+  color: #ffd27d;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+}
+
+.related-header h3 {
+  color: #fff7ed;
   font-size: 1.8rem;
-  margin-bottom: 1.5rem;
 }
 
 .related-product-card {
-  background: #221510;
-  border-radius: 15px;
-  padding: 1rem;
-  text-align: center;
-  transition: all 0.3s;
   display: block;
+  height: 100%;
+  background: rgba(18, 11, 8, 0.56);
+  border-radius: 22px;
+  padding: 1rem;
   text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .related-product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(102, 187, 106, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
 }
 
 .related-product-card img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
+  border-radius: 16px;
+  margin-bottom: 0.9rem;
+}
+
+.related-category {
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(102, 187, 106, 0.12);
+  color: #dff7e0;
+  font-size: 0.78rem;
+  margin-bottom: 0.7rem;
 }
 
 .related-product-card h4 {
-  color: white;
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
+  color: #fff6ea;
+  margin-bottom: 0.4rem;
+  white-space: pre-line;
 }
 
 .related-price {
-  color: #66bb6a;
-  font-weight: 600;
+  color: #9df8a4;
+  font-weight: 700;
 }
 
 .related-product-card.disabled {
-  position: relative;
-  cursor: default;
-  opacity: 0.9;
+  opacity: 0.88;
 }
 
 .related-product-card.disabled:hover {
@@ -677,110 +768,77 @@ export default {
 }
 
 .price-soon {
-  background: rgba(255, 183, 77, 0.06);
-  border: 1px dashed rgba(255,183,77,0.18);
-  color: #f5e6d8;
-  margin-bottom: 0.3rem;
-}
-
-.coming-soon-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: linear-gradient(135deg, #ffb74d 0%, #ff8a65 100%);
-  color: #221510;
-  font-weight: 800;
-  padding: 6px 10px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  z-index: 10;
-  font-size: 0.85rem;
-  letter-spacing: 0.4px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.coming-soon-badge i {
-  font-size: 0.9rem;
+  color: #ffe2a8;
 }
 
 .not-found {
   text-align: center;
   padding: 4rem 2rem;
-  background: #55342c;
-  border-radius: 20px;
-  max-width: 600px;
+  background: linear-gradient(180deg, rgba(38, 24, 19, 0.96) 0%, rgba(27, 17, 14, 0.98) 100%);
+  border-radius: 28px;
+  max-width: 700px;
   margin: 0 auto;
+  border: 1px solid rgba(240, 218, 188, 0.08);
 }
 
 .not-found i {
   font-size: 4rem;
-  color: #66bb6a;
+  color: #ffd27d;
   margin-bottom: 1rem;
 }
 
 .not-found h1 {
-  color: white;
+  color: #fff7ed;
   margin-bottom: 1rem;
 }
 
 .not-found p {
-  color: #d0d0d0;
-  margin-bottom: 2rem;
+  color: #d6c7bb;
+  margin-bottom: 1.5rem;
 }
 
-.not-found .button {
-  background: #66bb6a;
-  color: white;
-  padding: 0.8rem 2rem;
-  border-radius: 25px;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s;
+.not-found-btn {
+  background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+  color: #fff;
 }
 
-.not-found .button:hover {
-  background: #388e3c;
-  transform: translateY(-2px);
+.not-found-btn:hover {
+  color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .product-title {
-    font-size: 1.8rem;
+  .product-body,
+  .related-products {
+    padding-inline: 1rem;
   }
 
-  .product-image img {
-    height: 250px;
+  .product-summary {
+    padding: 1.3rem;
   }
 
-  .action-section {
+  .product-image-card img {
+    min-height: 300px;
+  }
+
+  .highlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-section,
+  .availability-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .quantity-selector {
-    justify-content: center;
-  }
-
-  .buttons-container {
-    justify-content: center;
-  }
-
+  .buttons-container,
   .share-buttons {
-    justify-content: center;
+    width: 100%;
   }
 
-  .related-products .columns {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .related-products .column {
-    min-width: 200px;
+  .whatsapp-btn,
+  .notify-btn,
+  .share-btn {
+    width: 100%;
   }
 }
 </style>

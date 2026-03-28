@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "node scripts/vue-cli-safe.js serve",
+    "build": "node scripts/vue-cli-safe.js build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.0.1",
