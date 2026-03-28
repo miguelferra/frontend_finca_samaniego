@@ -597,6 +597,12 @@ export default {
   gap: 0.75rem;
 }
 
+@media (max-width: 768px) {
+  .share-buttons {
+    flex-direction: column;
+  }
+}
+
 .share-btn {
   background: rgba(255, 255, 255, 0.04);
   color: #f1e7de;
